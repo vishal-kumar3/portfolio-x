@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, body {
-  font-family: var(--font-space-grotesk);
+  font-family: var(--font-space-grotesk), var(--font-geist-mono), var(--font-geist-sans) , var(--font-roboto), var(--font-inter);
   letter-spacing: -0.05em;
 }
 

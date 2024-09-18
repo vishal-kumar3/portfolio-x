@@ -26,7 +26,8 @@ export default function Header() {
     <>
       <header className="flex items-center justify-center transition-all duration-300">
         <nav
-          className={`fixed top-2 z-50 text-xl hidden md:flex md:w-[550px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out ${scrolled && "bg-background/100  shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] backdrop-filter backdrop-blur-sm rounded-[10px] "}`}
+          className={`fixed top-2 z-50 text-xl hidden md:flex md:w-[550px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out ${scrolled && "shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] backdrop-filter backdrop-blur-sm rounded-[10px]"}`}
+          style={{ backgroundColor: scrolled ? 'hsl(var(--background)/0.8)' : '' }}
         >
           <Link
             href="/"

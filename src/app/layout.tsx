@@ -22,17 +22,16 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk"
 });
 
-// Import local fonts
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -45,10 +44,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${roboto.variable} ${inter.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${inter.variable}`}>
       <body
-        // ${geistSans.variable} ${geistMono.variable}
-        className={`${spaceGrotesk.variable} ${roboto.variable} ${inter.variable} transition-colors ease-linear bg-background duration-300 antialiased flex justify-center h-[5000px]`}
+
+        className={`${spaceGrotesk.variable} ${roboto.variable} ${inter.variable} transition-colors ease-linear bg-background duration-300 antialiased flex justify-center`}
       >
         <ThemeProvider attribute="class" defaultTheme='light'>
           {children}
