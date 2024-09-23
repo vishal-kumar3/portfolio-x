@@ -83,9 +83,9 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <button className="fixed hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-3 right-5 size-10 flex justify-center items-center rounded-full border border-border overflow-hidden">
+      <Link href='/resume.pdf' target="_blank" className="fixed hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-3 right-5 size-10 flex justify-center items-center rounded-full border border-border overflow-hidden">
         VK
-      </button>
+      </Link>
     </>
   );
 }

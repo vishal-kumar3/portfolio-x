@@ -8,8 +8,6 @@ export function useDiscord() {
     socket: true,
   });
 
-  console.log("result:- ", result.status);
-
   return {
     ...result,
   };
