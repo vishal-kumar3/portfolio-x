@@ -22,6 +22,12 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk"
 });
 
+// const spaceGrotesk = localFont({
+//   src: "fonts/space-grotesk-v15-latin-regular.woff2",
+//   variable: "--font-space-grotesk",
+//   weight: "100 900",
+// })
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

@@ -1,20 +1,47 @@
+"use client"
 import { Clock } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useDiscord } from '../hooks/lanyard';
 
-const AboutSection = () => {
+const AboutSection = ({initialTime}: {initialTime?: string}) => {
+  const [username, setUsername] = useState("vishal_kumar3");
+  const [discordOnline, setDiscordOnline] = useState("offline");
+  const [currTime, setCurrTime] = useState("Time");
+  const {status: data} = useDiscord();
+  const [activityImage, setActivityImage] = useState("/question.jpg");
+
+  const localTime = () => setCurrTime(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+
+  useEffect(() => {
+    const interval = setInterval(() => localTime(), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if(!data) return setActivityImage("/question.jpg");
+
+    setUsername(data?.discord_user.username)
+    setDiscordOnline(data?.discord_status)
+    setActivityImage(`https://cdn.discordapp.com/avatars/${process.env.NEXT_PUBLIC_DISCORD_ID}/${data?.discord_user.avatar}.png?size=512`)
+  }, [data])
+
   return (
-    <div className="text-foreground p-4 w-full mx-auto">
+    <section id='about' className="text-foreground p-4 w-full mx-auto">
       <div className="md:flex md:space-x-4 md:items-center">
         {/* Activity Section */}
         <div className="mb-4 text-lg md:mb-0 md:w-1/2">
           <div className="flex items-center gap-6 sm:gap-20 md:gap-8">
-            <div className='size-[8rem] bg-red-300'>Kya pta!!!</div>
+            <Image src={activityImage} width={128} height={128} alt='Kya pta' className='size-[8rem] rounded-[18px] bg-[#422006]' />
             <div className='leading-6'>
-              <p className="text-xl leading-6 font-semibold text-foreground">@vishalKumar</p>
+              <p className="text-xl leading-6 font-semibold text-foreground">@{username}</p>
               <p className="text-foreground flex gap-1 items-center">
                 <Clock size={15} className="text-lg" />
-                offline
+                {discordOnline}
               </p>
-              <p className="text-md text-foreground">9/18/2024, 11:43:55 PM</p>
+              <p className="text-md text-foreground">
+                {currTime}
+              </p>
             </div>
           </div>
         </div>
@@ -28,7 +55,7 @@ const AboutSection = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

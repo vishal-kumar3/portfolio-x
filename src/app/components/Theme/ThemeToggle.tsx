@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
+import { Moon, Sun } from 'lucide-react'
+import { cn } from '@/app/lib/utils'
 
-export default function ThemeToggle() {
+export default function ThemeToggle({className, size}: {className?: string, size?: number}) {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -15,9 +17,9 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-md bg-background text-foreground transition-colors"
+      className={cn("text-foreground transition-colors", className)}
     >
-      {theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      {theme === 'dark' ? <Moon size={size || 16} /> : <Sun size={size || 16} />}
     </button>
   )
 }

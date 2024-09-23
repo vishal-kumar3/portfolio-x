@@ -1,8 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { FaGithub, FaDiscord, FaEnvelope, FaCoffee } from 'react-icons/fa';
 import Link from 'next/link';
+import { dataLinks } from '../data/links';
+import ThemeToggle from './Theme/ThemeToggle';
+import Tooltip from './Tooltip';
 
 const HeroSection = () => {
   const [tiltStyle, setTiltStyle] = useState({});
@@ -26,30 +28,31 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative flex flex-col md:gap-8 md:flex-row justify-between items-center py-10 md:py-20 overflow-hidden md:px-8">
+    <section id='#home' className="relative flex flex-col md:gap-8 md:flex-row justify-between items-center py-10 md:py-20 overflow-hidden md:px-8">
       {/* Left part */}
       <div className="relative flex-1 z-10 max-w-xl mb-10 md:mb-0">
         <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
-          Vishal
+          Visha
+          <span className="relative inline-flex items-center justify-center">
+            <span className="relative z-10 pr-[0.4rem]">l</span>
+            <ThemeToggle size={20} className="absolute z-50 animate-[bounce_1s_ease-in-out_infinite] -top-2 mx-auto" />
+          </span>
         </h1>
         <p className="~text-[22px]/[26px] mb-6 opacity-80">
           Innovative Full Stack Wizard.
           <br />
           Bridging the gap between innovation and functionality.
         </p>
-        <div className="flex space-x-10 mb-8">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors">
-            <FaGithub size={24} />
-          </a>
-          <a href="https://discord.gg/yourserver" target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors">
-            <FaDiscord size={24} />
-          </a>
-          <a href="mailto:your.email@example.com" className="text-text hover:text-primary transition-colors">
-            <FaEnvelope size={24} />
-          </a>
-          <a href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors">
-            <FaCoffee size={24} />
-          </a>
+        <div className="flex space-x-5 mb-8 px-2">
+          {
+            dataLinks.map((link) => (
+              <Tooltip key={link.id} tip={link.tip}>
+                <Link key={link.id} href={link.link} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors">
+                  {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-elavation-opp_one" })}
+                </Link>
+              </Tooltip>
+            ))
+          }
         </div>
         <Link href='/#work' className="bg-card text-card-foreground flex items-center justify-center sm:block sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group">
           <span className="relative z-10">Discover my work ↓</span>
@@ -67,13 +70,12 @@ const HeroSection = () => {
           className="rounded-[42px] ~w-[300px]/[400px] overflow-hidden shadow-2xl"
           style={tiltStyle}
         >
-          {/* //TODO: Image Here */}
           <Image
             src='/vishalkumar.jpg'
             width={400}
             height={400}
             alt='Vishal Kumar'
-            className='hidden md:block w-full h-full object-cover object-center transition-transform hover:scale-105 aspect-square'
+            className='hidden md:block w-full h-full object-cover object-right scale-125 transition-transform hover:scale-110 aspect-square'
           />
           {/* <div className='transition-transform hover:scale-105 aspect-square bg-blue-300 hidden md:block ~size-[250px]/[400px]'></div> */}
         </div>

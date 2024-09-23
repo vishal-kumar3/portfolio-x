@@ -16,6 +16,12 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        elavation: {
+          one: "var(--elavation-one)",
+          two: "var(--elavation-two)",
+          opp_one: "var(--elavation-opp-one)",
+          opp_two: "var(--elavation-opp-two)",
+        },
         card: {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",

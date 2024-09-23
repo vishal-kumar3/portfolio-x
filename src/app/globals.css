@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-space-grotesk: 'Space Grotesk';
+  --font-roboto: 'Roboto', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+
 html, body {
   font-family: var(--font-space-grotesk), var(--font-geist-mono), var(--font-geist-sans) , var(--font-roboto), var(--font-inter);
   letter-spacing: -0.05em;
+  scroll-behavior: smooth;
 }
 
-@layer base {
+/* @layer base {
 	:root {
 		--background: #b4d6cd;
 		--foreground: #2a3d38;
@@ -26,10 +34,44 @@ html, body {
 		--popover: #2a3d38;
 		--popover-foreground: #9bbfb4;
 	}
+} */
+
+@layer base {
+	:root {
+		--background: #CDD8FF;
+		--foreground: #03346E;
+    --elavation-one: #CDD8FF3A;
+    --elavation-two: #CDD8FFCA;
+    --elavation-opp-one: #03346E3A;
+    --elavation-opp-two: #03346ECA;
+		--card: #9DBDFF;
+		--card-foreground: #03346E;
+		--popover: #b4d6cd;
+		--popover-foreground: #3f524d;
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: #03346E;
+		--foreground: #CDD8FF;
+    --elavation-one: #03346E3A;
+    --elavation-two: #03346ECA;
+    --elavation-opp-one: #CDD8FF3A;
+    --elavation-opp-two: #CDD8FFCA;
+		--card: #C2D1FF;
+		--card-foreground: #1C1C1C;
+		--popover: #2a3d38;
+		--popover-foreground: #9bbfb4;
+	}
 }
 
 @layer utilities {
 	.text-balance {
 		text-wrap: balance;
 	}
+}
+
+.webkit_backdrop_filter_15px {
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0px 15px 8px -10px rgba(0, 0, 0, 0.4);
 }

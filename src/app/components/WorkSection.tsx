@@ -23,7 +23,7 @@ const projects = [
 
 const WorkSection = () => {
   return (
-    <div className="text-foreground p-4 rounded-[var(--radius)] w-full mx-auto">
+    <div id='work' className="text-foreground p-4 rounded-[var(--radius)] w-full mx-auto">
       <h2 className="text-4xl font-semibold mx-auto w-fit mb-4 text-foreground">code:work</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {projects.map((project) => (
