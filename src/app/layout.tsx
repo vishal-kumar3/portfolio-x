@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter, Roboto, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
+
 
 const inter = Inter({
   subsets: ['latin'],
@@ -58,6 +60,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme='light'>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -56,15 +56,15 @@ export default function Header() {
         >
           {
             navigationTabs.map((tab) => (
-            <Link
-              key={tab.title}
-              href={tab.href}
-              className="text-foreground opacity-1 px-6 py-2 rounded-full hover:bg-elavation-opp_one transition-colors duration-300 "
-            >
-              {tab.topTitle}
-            </Link>
-          ))
-        }
+              <Link
+                key={tab.title}
+                href={tab.href}
+                className="text-foreground opacity-1 px-6 py-2 rounded-full hover:bg-elavation-opp_one transition-colors duration-300 "
+              >
+                {tab.topTitle}
+              </Link>
+            ))
+          }
         </nav>
         <nav className="md:hidden rounded-t-xl text-xl fixed z-50 bottom-0 left-0 right-0 bg-card backdrop-blur-sm">
           <div className="flex justify-around py-2">
@@ -78,7 +78,7 @@ export default function Header() {
                   <div>{tab.icon}</div>
                   <div>{tab.title}</div>
                 </Link>
-            ))
+              ))
             }
           </div>
         </nav>

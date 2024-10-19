@@ -1,4 +1,5 @@
-import { FaCoffee, FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
+import { FaCoffee, FaDiscord, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 
 export const dataLinks = [
   {
@@ -24,9 +25,16 @@ export const dataLinks = [
   },
   {
     "id": 4,
-    "icon": FaCoffee,
-    "name": "Buy me a coffee",
-    "link": "https://buymeacoffee.com/vishalkumar3",
-    "tip": "vishalkumar3"
-  }
+    "icon": FaLinkedin,
+    "name": "LinkedIn",
+    "link": "https://www.linkedin.com/in/vishal-kumar-61b2b4254/",
+    "tip": "LinkedIn Profile"
+  },
+  {
+    "id": 5,
+    "icon": SiLeetcode,
+    "name": "Leetcode",
+    "link": "https://leetcode.com/u/VishalKumar10/",
+    "tip": "Leetcode"
+  },
 ]

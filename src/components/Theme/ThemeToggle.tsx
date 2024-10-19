@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
-import { cn } from '@/app/lib/utils'
+import { cn } from '@/lib/utils'
 
-export default function ThemeToggle({className, size}: {className?: string, size?: number}) {
+export default function ThemeToggle({ className, size }: { className?: string, size?: number }) {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 

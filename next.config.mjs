@@ -6,6 +6,14 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: 'cdn.discordapp.com',
 			},
+			{
+				protocol: 'https',
+				hostname: 'opengraph.githubassets.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'github.com',
+			},
 		],
 	},
 };

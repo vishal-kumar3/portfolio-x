@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useDiscord } from '../hooks/lanyard';
 
-const AboutSection = ({initialTime}: {initialTime?: string}) => {
+const AboutSection = () => {
   const [username, setUsername] = useState("vishal_kumar3");
   const [discordOnline, setDiscordOnline] = useState("offline");
   const [currTime, setCurrTime] = useState("Time");
-  const {status: data} = useDiscord();
+  const { status: data } = useDiscord();
   const [activityImage, setActivityImage] = useState("/question.jpg");
 
   const localTime = () => setCurrTime(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
@@ -19,7 +19,7 @@ const AboutSection = ({initialTime}: {initialTime?: string}) => {
   }, []);
 
   useEffect(() => {
-    if(!data) return setActivityImage("/question.jpg");
+    if (!data) return setActivityImage("/question.jpg");
 
     setUsername(data?.discord_user.username)
     setDiscordOnline(data?.discord_status)
@@ -28,6 +28,18 @@ const AboutSection = ({initialTime}: {initialTime?: string}) => {
 
   return (
     <section id='about' className="text-foreground p-4 w-full mx-auto">
+      <h2 className="flex items-center justify-center gap-2 text-4xl font-semibold mx-auto w-fit mb-4 text-foreground">
+        <Image
+          src={"/icons/about.svg"}
+          alt=' '
+          width={32}
+          height={32}
+        />
+        <span>
+          code:about
+        </span>
+      </h2>
+
       <div className="md:flex md:space-x-4 md:items-center">
         {/* Activity Section */}
         <div className="mb-4 text-lg md:mb-0 md:w-1/2">
