@@ -15,6 +15,7 @@ html, body {
   scroll-behavior: smooth;
 }
 
+/* Green Shade */
 /* @layer base {
 	:root {
 		--background: #b4d6cd;
@@ -36,35 +37,75 @@ html, body {
 	}
 } */
 
+/* Default Shade */
 @layer base {
-	:root {
-		--background: #CDD8FF;
-		--foreground: #03346E;
+  /* Black and White */
+  :root {
+    --primary: #CDD8FF;
+    --background: #F5F5F5;
+    --foreground: #1A1A1A;
+    --elavation-one: #1A1A1A1A;
+    --elavation-two: #1A1A1A4A;
+    --elavation-opp-one: #F5F5F51A;
+    --elavation-opp-two: #F5F5F54A;
+    --card: #E0E0E0;
+    --card-foreground: #1A1A1A;
+    --popover: #D0D0D0;
+    --popover-foreground: #2E2E2E;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --primary: #03346E;
+    --background: #1E1E1E;
+    --foreground: #E5E5E5;
+    --elavation-one: #E5E5E51A;
+    --elavation-two: #E5E5E54A;
+    --elavation-opp-one: #1E1E1E1A;
+    --elavation-opp-two: #1E1E1E4A;
+    --card: #2B2B2B;
+    --card-foreground: #E5E5E5;
+    --popover: #3B3B3B;
+    --popover-foreground: #CCCCCC;
+    --radius: 0.5rem;
+  }
+}
+
+/* Blue Shade */
+@layer base {
+  .blue-theme {
+    --primary: #F5F5F5;
+    --background: #CDD8FF;
+    --foreground: #03346E;
     --elavation-one: #CDD8FF3A;
     --elavation-two: #CDD8FFCA;
     --elavation-opp-one: #03346E3A;
     --elavation-opp-two: #03346ECA;
-		--card: #9DBDFF;
-		--card-foreground: #03346E;
-		--popover: #b4d6cd;
-		--popover-foreground: #3f524d;
-		--radius: 0.5rem;
-	}
+    --card: #9DBDFF;
+    --card-foreground: #03346E;
+    --popover: #b4d6cd;
+    --popover-foreground: #3f524d;
+    --radius: 0.5rem;
+  }
 
-	.dark {
-		--background: #03346E;
-		--foreground: #CDD8FF;
+  .blue-theme.dark {
+    --primary: #0D0D0D;
+    --background: #03346E;
+    --foreground: #CDD8FF;
     --elavation-one: #03346E3A;
     --elavation-two: #03346ECA;
     --elavation-opp-one: #CDD8FF3A;
     --elavation-opp-two: #CDD8FFCA;
-		--card: #C2D1FF;
-		--card-foreground: #1C1C1C;
-		--popover: #b4d6cd;
-		--popover-foreground: #2a3d38;
+    --card: #C2D1FF;
+    --card-foreground: #1C1C1C;
+    --popover: #b4d6cd;
+    --popover-foreground: #2a3d38;
     --radius: 0.5rem;
-	}
+  }
 }
+
+
+
 
 @layer utilities {
 	.text-balance {
@@ -77,3 +118,55 @@ html, body {
   box-shadow: 0px 15px 8px -10px rgba(0, 0, 0, 0.4);
 }
 
+.toggleButton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background); /* Adaptive background based on theme */
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+/* Ripple effect
+.ripple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--elavation-two) 10%, transparent 60%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* When the button is toggled, ripple expands */
+/* .theme-toggle-light .ripple {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0.3;
+} */
+
+/* .theme-toggle-dark .ripple {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+} */
+
+/* Glowing effect for the Sun icon in light mode */
+/* .sunGlow {
+  color: var(--foreground);
+  box-shadow: 0 0 10px 2px rgba(255, 223, 130, 0.8);
+  transition: color 0.5s ease, box-shadow 0.5s ease;
+} */
+
+/* Glowing effect for the Moon icon in dark mode */
+/* .moonGlow {
+  color: var(--foreground);
+  box-shadow: 0 0 10px 2px rgba(100, 130, 255, 0.6);
+  transition: color 0.5s ease, box-shadow 0.5s ease;
+} */
+
+/* Smooth transition for the button hover state */
+/* .toggleButton:hover {
+  background-color: var(--elavation-opp-one);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+} */

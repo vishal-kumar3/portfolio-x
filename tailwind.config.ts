@@ -14,6 +14,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        primary: "var(--primary)",
         background: "var(--background)",
         foreground: "var(--foreground)",
         elavation: {
@@ -30,6 +31,20 @@ const config: Config = {
           DEFAULT: "var(--popover)",
           foreground: "var(--popover-foreground)",
         }
+      },
+      animation: {
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'twinkle': 'twinkle 1.5s ease-in-out infinite',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: '0.2' },
+          '50%': { opacity: '0.5' },
+        },
+        twinkle: {
+          '0%, 100%': { opacity: '0' },
+          '50%': { opacity: '1' },
+        },
       },
     },
   },

@@ -1,10 +1,16 @@
 "use client"
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { dataLinks } from '../data/links';
 import ThemeToggle from './Theme/ThemeToggle';
 import Tooltip from './Tooltip';
+import dynamic from 'next/dynamic'
+import VishalFallback from './VishalFallback';
+
+const ColorThemeToggle = dynamic(() => import('@/components/Theme/ColorThemeToggle'), {
+  ssr: false,
+})
 
 const HeroSection = () => {
   const [tiltStyle, setTiltStyle] = useState({});
@@ -31,13 +37,21 @@ const HeroSection = () => {
     <section id='#home' className="relative flex flex-col md:gap-8 md:flex-row justify-between items-center py-10 md:py-20 overflow-hidden md:px-8">
       {/* Left part */}
       <div className="relative flex-1 z-10 max-w-xl mb-10 md:mb-0">
-        <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
-          Visha
-          <span className="relative inline-flex items-center justify-center">
-            <span className="relative z-10 pr-[0.4rem]">l</span>
-            <ThemeToggle size={20} className="absolute z-50 animate-[bounce_1s_ease-in-out_infinite] -top-2 mx-auto" />
-          </span>
-        </h1>
+        <Suspense fallback={<VishalFallback />}>
+          <Tooltip tip='Change Color Theme'>
+            <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
+              <ColorThemeToggle>
+                Visha
+              </ColorThemeToggle>
+              <span className="relative inline-flex items-center justify-center">
+                <ColorThemeToggle>
+                  <span className="relative z-10 pr-[0.4rem]">l</span>
+                </ColorThemeToggle>
+                <ThemeToggle size={20} className="absolute z-50 animate-[bounce_1s_ease-in-out_infinite] -top-3 mx-auto" />
+              </span>
+            </h1>
+          </Tooltip>
+        </Suspense>
         <p className="~text-[22px]/[26px] mb-6 opacity-80">
           Innovative Full Stack Wizard.
           <br />
@@ -47,7 +61,7 @@ const HeroSection = () => {
           {
             dataLinks.map((link) => (
               <Tooltip key={link.id} tip={link.tip}>
-                <Link key={link.id} href={link.link} target="_blank" rel="noopener noreferrer" className="text-text hover:text-primary transition-colors">
+                <Link key={link.id} href={link.link} target="_blank" rel="noopener noreferrer" className="text-text transition-colors">
                   {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-elavation-opp_one" })}
                 </Link>
               </Tooltip>
