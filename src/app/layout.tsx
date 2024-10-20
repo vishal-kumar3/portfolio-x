@@ -43,8 +43,6 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-import type { Metadata, Viewport } from 'next'
-
 const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://vishalkumar.wiki'
 
 export const metadata: Metadata = {
@@ -96,7 +94,7 @@ export const metadata: Metadata = {
   },
   other: {
     'og:image:width': '1200',
-    'og:image:height': '630', 
+    'og:image:height': '630',
     'og:locale': 'en_US',
     'og:site_name': "Vishal Kumar's Portfolio",
     'linkedin:author': 'https://www.linkedin.com/in/vishal-kumar-61b2b4254/',
