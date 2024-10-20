@@ -68,10 +68,18 @@ const HeroSection = () => {
             ))
           }
         </div>
-        <Link href='/#work' className="bg-card text-card-foreground flex items-center justify-center sm:block sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group">
-          <span className="relative z-10">Discover my work ↓</span>
-          <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
-        </Link>
+        <div className="flex flex-col gap-2">
+          <div className="sm:hidden">
+            <Link href='/resume.pdf' target="_blank" className="sm:block bg-card text-card-foreground flex items-center justify-center sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group">
+              <span className="relative z-10">Resume 📝</span>
+              <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
+            </Link>
+          </div>
+          <Link href='/#work' className="bg-card text-card-foreground flex items-center justify-center sm:block sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group">
+            <span className="relative z-10">Discover my work 💼 ↓</span>
+            <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
+          </Link>
+        </div>
       </div>
 
       {/* Right part */}
