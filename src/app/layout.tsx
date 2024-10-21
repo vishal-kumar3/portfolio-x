@@ -5,7 +5,7 @@ import { Inter, Roboto, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"
 import type { Viewport } from 'next'
-// import { CSPostHogProvider } from '@/providers/PosthogProvider';
+import { CSPostHogProvider } from '@/providers/PosthogProvider';
 
 
 const inter = Inter({
@@ -115,7 +115,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${inter.variable}`}>
-      {/* <CSPostHogProvider> */}
+      <CSPostHogProvider>
         <body
 
           className={`${spaceGrotesk.variable} ${roboto.variable} ${inter.variable} transition-colors ease-linear bg-background duration-300 antialiased flex justify-center`}
@@ -125,7 +125,7 @@ export default function RootLayout({
           </ThemeProvider>
           <Analytics />
         </body>
-      {/* </CSPostHogProvider> */}
+      </CSPostHogProvider>
     </html>
   );
 }

@@ -1,6 +1,5 @@
-import { Mail, Coffee, Home, Info, Briefcase } from 'lucide-react'
+"use client"
 import Link from 'next/link'
-import { BsGithub } from 'react-icons/bs'
 import { dataLinks } from '../data/links'
 import Tooltip from './Tooltip'
 
@@ -14,7 +13,14 @@ export default function Footer() {
             {
               dataLinks.map((link) => (
                 <Tooltip key={link.id} tip={link.tip}>
-                  <Link key={link.id} href={link.link} target="_blank" rel="noopener noreferrer" className="text-text text-foreground transition-colors">
+                  <Link
+                    key={link.id}
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={link.onclick}
+                    className="text-text text-foreground transition-colors"
+                  >
                     {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-elavation-opp_one" })}
                   </Link>
                 </Tooltip>

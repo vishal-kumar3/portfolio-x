@@ -3,16 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --font-space-grotesk: 'Space Grotesk';
-  --font-roboto: 'Roboto', sans-serif;
-  --font-inter: 'Inter', sans-serif;
+	--font-space-grotesk: 'Space Grotesk';
+	--font-roboto: 'Roboto', sans-serif;
+	--font-inter: 'Inter', sans-serif;
 }
 
+:root {
+	--selection-background-light: hsl(210, 100%, 80%); /* Light background */
+	--selection-color-light: hsl(210, 80%, 25%); /* Dark text */
+	--selection-background-dark: hsl(210, 80%, 50%); /* Dark background */
+	--selection-color-dark: hsl(220, 80%, 95%); /* Light text */
+}
 
-html, body {
-  font-family: var(--font-space-grotesk), var(--font-geist-mono), var(--font-geist-sans) , var(--font-roboto), var(--font-inter);
-  letter-spacing: -0.05em;
-  scroll-behavior: smooth;
+/* .light ::selection {
+  background-color: var(--selection-background-light);
+  color: var(--selection-color-light);
+}
+
+.dark ::selection {
+  background-color: var(--selection-background-dark);
+  color: var(--selection-color-dark);
+} */
+
+html,
+body {
+	font-family: var(--font-space-grotesk), var(--font-geist-mono),
+		var(--font-geist-sans), var(--font-roboto), var(--font-inter);
+	letter-spacing: -0.05em;
+	scroll-behavior: smooth;
 }
 
 /* Green Shade */
@@ -39,73 +57,143 @@ html, body {
 
 /* Default Shade */
 @layer base {
-  /* Black and White */
-  :root {
-    /* --primary: #CDD8FF; */
-    --background: #F5F5F5;
-    --foreground: #1A1A1A;
-    --elavation-one: #1A1A1A1A;
-    --elavation-two: #1A1A1A4A;
-    --elavation-opp-one: #F5F5F51A;
-    --elavation-opp-two: #F5F5F54A;
-    --card: #E0E0E0;
-    --card-foreground: #1A1A1A;
-    --popover: #D0D0D0;
-    --popover-foreground: #2E2E2E;
-    --radius: 0.5rem;
-  }
+	/* Black and White */
+	:root {
+		/* --primary: #CDD8FF; */
+		--background: #f5f5f5;
+		--foreground: #1a1a1a;
+		--elavation-one: #1a1a1a1a;
+		--elavation-two: #1a1a1a4a;
+		--elavation-opp-one: #f5f5f51a;
+		--elavation-opp-two: #f5f5f54a;
+		--card: #e0e0e0;
+		--card-foreground: #1a1a1a;
+		--popover: #d0d0d0;
+		--popover-foreground: #2e2e2e;
+		--radius: 0.5rem;
 
-  .dark {
-    /* --primary: #03346E; */
-    --background: #1E1E1E;
-    --foreground: #E5E5E5;
-    --elavation-one: #E5E5E51A;
-    --elavation-two: #E5E5E54A;
-    --elavation-opp-one: #1E1E1E1A;
-    --elavation-opp-two: #1E1E1E4A;
-    --card: #2B2B2B;
-    --card-foreground: #E5E5E5;
-    --popover: #3B3B3B;
-    --popover-foreground: #CCCCCC;
-    --radius: 0.5rem;
-  }
+		/* Selection Styles */
+		/* --selection-background: hsl(210, 100%, 85%);
+		--selection-color: hsl(210, 100%, 20%); */
+
+		--selection-background: hsl(20, 100%, 80%);
+  --selection-color: hsl(20, 80%, 10%);
+
+		/* --selection-background: hsl(200, 100%, 90%);
+  --selection-color: hsl(200, 80%, 20%); */
+
+		/* --selection-background: hsl(45, 100%, 80%);
+		--selection-color: hsl(45, 80%, 20%); */
+	}
+
+	.dark {
+		/* --primary: #03346E; */
+		--background: #1e1e1e;
+		--foreground: #e5e5e5;
+		--elavation-one: #e5e5e51a;
+		--elavation-two: #e5e5e54a;
+		--elavation-opp-one: #1e1e1e1a;
+		--elavation-opp-two: #1e1e1e4a;
+		--card: #2b2b2b;
+		--card-foreground: #e5e5e5;
+		--popover: #3b3b3b;
+		--popover-foreground: #cccccc;
+		--radius: 0.5rem;
+
+		/* Selection Styles */
+		/* --selection-background: hsl(210, 100%, 75%);
+    --selection-color: hsl(0, 0%, 95%); */
+
+		--selection-background: hsl(20, 100%, 40%);
+  --selection-color: hsl(0, 0%, 98%);
+
+		/* --selection-background: hsl(200, 80%, 60%);
+  --selection-color: hsl(0, 0%, 95%); */
+
+		/* --selection-background: hsl(45, 100%, 50%);
+		--selection-color: hsl(0, 0%, 9%); */
+	}
 }
 
 /* Blue Shade */
 @layer base {
-  .blue-theme {
-    /* --primary: #F5F5F5; */
-    --background: #CDD8FF;
-    --foreground: #03346E;
-    --elavation-one: #CDD8FF3A;
-    --elavation-two: #CDD8FFCA;
-    --elavation-opp-one: #03346E3A;
-    --elavation-opp-two: #03346ECA;
-    --card: #9DBDFF;
-    --card-foreground: #03346E;
-    --popover: #b4d6cd;
-    --popover-foreground: #3f524d;
-    --radius: 0.5rem;
-  }
+	.blue-theme {
+		/* --primary: #F5F5F5; */
+		--background: #cdd8ff;
+		--foreground: #03346e;
+		--elavation-one: #cdd8ff3a;
+		--elavation-two: #cdd8ffca;
+		--elavation-opp-one: #03346e3a;
+		--elavation-opp-two: #03346eca;
+		--card: #9dbdff;
+		--card-foreground: #03346e;
+		--popover: #b4d6cd;
+		--popover-foreground: #3f524d;
+		--radius: 0.5rem;
 
-  .blue-theme.dark {
-    /* --primary: #0D0D0D; */
-    --background: #03346E;
-    --foreground: #CDD8FF;
-    --elavation-one: #03346E3A;
-    --elavation-two: #03346ECA;
-    --elavation-opp-one: #CDD8FF3A;
-    --elavation-opp-two: #CDD8FFCA;
-    --card: #C2D1FF;
-    --card-foreground: #1C1C1C;
-    --popover: #b4d6cd;
-    --popover-foreground: #2a3d38;
-    --radius: 0.5rem;
-  }
+		/* Selection Styles */
+		/* --selection-background: hsl(210, 80%, 60%);
+		--selection-color: hsl(0, 0%, 95%); */
+
+		--selection-background: hsl(20, 100%, 70%);
+  --selection-color: hsl(20, 80%, 20%);
+
+		/* --selection-background: hsl(200, 100%, 80%);
+  --selection-color: hsl(200, 80%, 20%); */
+
+		/* --selection-background: hsl(45, 100%, 70%);
+		--selection-color: hsl(45, 80%, 20%); */
+	}
+
+	.blue-theme.dark {
+		/* --primary: #0D0D0D; */
+		--background: #03346e;
+		--foreground: #cdd8ff;
+		--elavation-one: #03346e3a;
+		--elavation-two: #03346eca;
+		--elavation-opp-one: #cdd8ff3a;
+		--elavation-opp-two: #cdd8ffca;
+		--card: #c2d1ff;
+		--card-foreground: #1c1c1c;
+		--popover: #b4d6cd;
+		--popover-foreground: #2a3d38;
+		--radius: 0.5rem;
+
+		/* Selection Styles */
+		/* --selection-background: hsl(210, 80%, 40%);
+		--selection-color: hsl(0, 0%, 95%); */
+
+		--selection-background: hsl(20, 100%, 50%);
+  --selection-color: hsl(0, 0%, 95%);
+
+		/* --selection-background: hsl(200, 100%, 50%);
+  --selection-color: hsl(0, 0%, 95%); */
+
+		/* --selection-background: hsl(45, 100%, 40%);
+		--selection-color: hsl(0, 0%, 95%); */
+	}
 }
 
+/* Apply the selection styles */
+.light ::selection {
+	background-color: var(--selection-background);
+	color: var(--selection-color);
+}
 
+.dark ::selection {
+	background-color: var(--selection-background);
+	color: var(--selection-color);
+}
 
+.blue-theme ::selection {
+	background-color: var(--selection-background);
+	color: var(--selection-color);
+}
+
+.blue-theme.dark ::selection {
+	background-color: var(--selection-background);
+	color: var(--selection-color);
+}
 
 @layer utilities {
 	.text-balance {
@@ -114,16 +202,16 @@ html, body {
 }
 
 .webkit_backdrop_filter_15px {
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0px 15px 8px -10px rgba(0, 0, 0, 0.4);
+	-webkit-backdrop-filter: blur(15px);
+	box-shadow: 0px 15px 8px -10px rgba(0, 0, 0, 0.4);
 }
 
 .toggleButton {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--background); /* Adaptive background based on theme */
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+	position: relative;
+	overflow: hidden;
+	background-color: var(--background); /* Adaptive background based on theme */
+	border-radius: 50%;
+	transition: background-color 0.3s ease;
 }
 
 /* Ripple effect

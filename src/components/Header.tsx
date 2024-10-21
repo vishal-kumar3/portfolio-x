@@ -7,6 +7,7 @@ import { BiHome } from "react-icons/bi";
 import { IoInformation } from "react-icons/io5";
 import { CgWorkAlt } from "react-icons/cg";
 import { cn } from "../lib/utils";
+import { buttonClickEvent, ButtonEventName } from "@/utils/posthog";
 
 const navigationTabs = [
   {
@@ -14,18 +15,21 @@ const navigationTabs = [
     topTitle: "/",
     title: "Home",
     icon: <BiHome />,
+    onclick: () => {buttonClickEvent(ButtonEventName.HomeNavbar)}
   },
   {
     href: "/#about",
     topTitle: "about",
     title: "About",
     icon: <IoInformation />,
+    onclick: () => {buttonClickEvent(ButtonEventName.AboutNavbar)}
   },
   {
     href: "/#work",
     topTitle: "work",
     title: "Work",
     icon: <CgWorkAlt />,
+    onclick: () => {buttonClickEvent(ButtonEventName.WorkNavbar)}
   }
 ]
 
@@ -59,6 +63,7 @@ export default function Header() {
               <Link
                 key={tab.title}
                 href={tab.href}
+                onClick={tab.onclick}
                 className="text-foreground opacity-1 px-6 py-2 rounded-full hover:bg-elavation-opp_one transition-colors duration-300 "
               >
                 {tab.topTitle}
@@ -73,6 +78,7 @@ export default function Header() {
                 <Link
                   key={tab.title}
                   href={tab.href}
+                  onClick={tab.onclick}
                   className="text-card-foreground flex flex-col items-center gap-2 hover:text-saffron-500 transition-colors px-4 py-2"
                 >
                   <div>{tab.icon}</div>
@@ -83,7 +89,12 @@ export default function Header() {
           </div>
         </nav>
       </header>
-      <Link href='/resume.pdf' target="_blank" className="hidden sm:fixed z-50 hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-3 right-5 size-10 sm:flex justify-center items-center rounded-full border border-border overflow-hidden">
+      <Link
+        href='/resume.pdf'
+        target="_blank"
+        onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
+        className="hidden sm:fixed z-50 hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-3 right-5 size-10 sm:flex justify-center items-center rounded-full border border-border overflow-hidden"
+      >
         VK
       </Link>
     </>

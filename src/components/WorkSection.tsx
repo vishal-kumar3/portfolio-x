@@ -1,27 +1,8 @@
-import { ExternalLink, Code } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Tooltip from './Tooltip';
-
-const projects = [
-  {
-    id: 1,
-    name: "Write Flow",
-    description: "Write Flow is a clean, intuitive blog app designed for effortless writing and seamless publishing. Stay focused on your creativity with real-time editing and easy formatting",
-    techStack: ["TypeScript", "Nextjs"],
-    author: "vishal-kumar3",
-    link: "https://github.com/vishal-kumar3/WriteFlow"
-  },
-  {
-    id: 2,
-    name: "Law Keeper",
-    description: "Law Keeper is an administrative platform for managing police operations, including officer recruitment, promotions, and ranks. It also offers e-FIR services and resources for understanding laws, ensuring a comprehensive and efficient law enforcement system.",
-    techStack: ["TypeScript", "Nextjs"],
-    author: "vishal-kumar3",
-    link: "https://github.com/vishal-kumar3/LawKeeper"
-  }
-];
-
+import RepoCard from './RepoCard';
 export interface Repo {
   owner: string;
   repo: string;
@@ -55,79 +36,7 @@ const WorkSection = async () => {
       {/* <GitHubPinnedRepos /> */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {repos.map((repo: Repo) => (
-          <div key={repo.repo} className="bg-card text-card-foreground p-4 rounded-[var(--radius)] flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <Link href={`https://github.com/${repo.owner}`} className='flex items-center gap-2'>
-                  <Image
-                    src={`https://github.com/${repo.owner.split("/")[0]}.png`}
-                    alt={repo.owner}
-                    className="rounded-full"
-                    width={20}
-                    height={20}
-                  />
-                  <span className="text-md">
-                    {repo.owner}
-                  </span>
-                </Link>
-                <div className="flex items-center gap-4">
-                  {
-                    repo.website && (
-                      <Tooltip tip={`${repo.website}`}>
-                        <Link href={repo.website} target="_blank">
-                          🚀
-                        </Link>
-                      </Tooltip>
-                    )
-                  }
-                  <Tooltip tip={`${repo.link}`}>
-                    <Link href={repo.link} target="_blank">
-                      <ExternalLink size={16} className="text-card-foreground" />
-                    </Link>
-                  </Tooltip>
-                </div>
-              </div>
-              <Link href={repo.link} target="_blank" className="text-2xl hover:underline font-semibold mb-2">
-                {repo.repo}
-              </Link>
-              <p className="text-lg leading-5 mb-4">{repo.description}</p>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="info flex gap-[.2rem] items-center">
-                <span
-                  className="dot h-[11px] w-[11px] rounded-[50%] inline-block text-accent"
-                  style={{ backgroundColor: repo.languageColor }}
-                />
-                <h6>{repo.language}</h6>
-              </div>
-              {repo.stars > 0 && (
-                <>
-                  <Image
-                    width={16}
-                    height={16}
-                    className="h-[16px] w-auto translate-y-[-1px]"
-                    src="icons/star.svg"
-                    id="star"
-                    alt="star"
-                  />
-                  <h6>{repo.stars}</h6>
-                </>
-              )}
-              {repo.forks > 0 && (
-                <>
-                  <Image
-                    width={16}
-                    height={16}
-                    className="h-[17px]"
-                    src="icons/fork.svg"
-                    id="fork"
-                    alt="fork"
-                  />
-                  <h6>{repo.forks}</h6>
-                </>
-              )}
-            </div>
-          </div>
+          <RepoCard repo={repo} />
         ))}
       </div>
     </div>

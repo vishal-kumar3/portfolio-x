@@ -7,9 +7,10 @@ if (typeof window !== 'undefined') {
   if(!process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     throw new Error('NEXT_PUBLIC_POSTHOG_KEY is not defined')
   }
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    person_profiles: 'identified_only',
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: '/ingest',
+    ui_host: 'https://us.posthog.com',
+    // person_profiles: 'identified_only',
     capture_pageview: true,
     autocapture: true,
   })

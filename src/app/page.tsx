@@ -1,4 +1,4 @@
-// import posthog from "posthog-js";
+
 import AboutSection from "../components/AboutSection";
 import Footer from "../components/FooterSection";
 import Header from "../components/Header";
