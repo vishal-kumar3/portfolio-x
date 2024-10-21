@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { themeClickEvent, ThemeEventName } from '@/utils/posthog'
 import { useTheme } from 'next-themes'
@@ -13,17 +13,6 @@ interface ColorThemeToggleProps {
 export default function ColorThemeToggle({ className, children }: ColorThemeToggleProps) {
   const { theme, setTheme } = useTheme()
   const [colorTheme, setColorTheme] = useState<'default' | 'blue'>('default')
-
-  useEffect(() => {
-    const root = document.documentElement
-    const randomTheme = Math.random() < 0.5 ? 'default' : 'blue'
-    if (randomTheme === 'blue') {
-      root.classList.add('blue-theme')
-    } else {
-      root.classList.remove('blue-theme')
-    }
-    setColorTheme(randomTheme as 'default' | 'blue')
-  }, [theme])
 
   const toggleColorTheme = () => {
     const root = document.documentElement
