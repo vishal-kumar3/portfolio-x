@@ -33,6 +33,10 @@ body {
 	scroll-behavior: smooth;
 }
 
+.card {
+  transition: all 0.3s ease, color 0.3s ease;
+}
+
 /* Green Shade */
 /* @layer base {
 	:root {
@@ -64,9 +68,11 @@ body {
 		--foreground: #1a1a1a;
 		--elavation-one: #1a1a1a1a;
 		--elavation-two: #1a1a1a4a;
-		--elavation-opp-one: #f5f5f51a;
+		--elavation-opp-one: #f5f5f575;
 		--elavation-opp-two: #f5f5f54a;
 		--card: #e0e0e0;
+		--card-hover: #d0d0d0; /* Slightly darker than --card for hover effect */
+		--card-hover-foreground: #000000;
 		--card-foreground: #1a1a1a;
 		--popover: #d0d0d0;
 		--popover-foreground: #2e2e2e;
@@ -77,7 +83,7 @@ body {
 		--selection-color: hsl(210, 100%, 20%); */
 
 		--selection-background: hsl(20, 100%, 80%);
-  --selection-color: hsl(20, 80%, 10%);
+		--selection-color: hsl(20, 80%, 10%);
 
 		/* --selection-background: hsl(200, 100%, 90%);
   --selection-color: hsl(200, 80%, 20%); */
@@ -92,9 +98,11 @@ body {
 		--foreground: #e5e5e5;
 		--elavation-one: #e5e5e51a;
 		--elavation-two: #e5e5e54a;
-		--elavation-opp-one: #1e1e1e1a;
+		--elavation-opp-one: #1e1e1e75;
 		--elavation-opp-two: #1e1e1e4a;
 		--card: #2b2b2b;
+		--card-hover: #333333; /* Slightly lighter than --card for hover effect */
+		--card-hover-foreground: #ffffff;
 		--card-foreground: #e5e5e5;
 		--popover: #3b3b3b;
 		--popover-foreground: #cccccc;
@@ -105,7 +113,7 @@ body {
     --selection-color: hsl(0, 0%, 95%); */
 
 		--selection-background: hsl(20, 100%, 40%);
-  --selection-color: hsl(0, 0%, 98%);
+		--selection-color: hsl(0, 0%, 98%);
 
 		/* --selection-background: hsl(200, 80%, 60%);
   --selection-color: hsl(0, 0%, 95%); */
@@ -126,6 +134,8 @@ body {
 		--elavation-opp-one: #03346e3a;
 		--elavation-opp-two: #03346eca;
 		--card: #9dbdff;
+		--card-hover: #accaff; /* Slightly darker than --card for hover effect */
+		--card-hover-foreground: #022b59;
 		--card-foreground: #03346e;
 		--popover: #b4d6cd;
 		--popover-foreground: #3f524d;
@@ -136,7 +146,7 @@ body {
 		--selection-color: hsl(0, 0%, 95%); */
 
 		--selection-background: hsl(20, 100%, 70%);
-  --selection-color: hsl(20, 80%, 20%);
+		--selection-color: hsl(20, 80%, 20%);
 
 		/* --selection-background: hsl(200, 100%, 80%);
   --selection-color: hsl(200, 80%, 20%); */
@@ -154,6 +164,8 @@ body {
 		--elavation-opp-one: #cdd8ff3a;
 		--elavation-opp-two: #cdd8ffca;
 		--card: #c2d1ff;
+		--card-hover: #d6e1ff; /* Slightly lighter than --card for hover effect */
+		--card-hover-foreground: #03346e;
 		--card-foreground: #1c1c1c;
 		--popover: #b4d6cd;
 		--popover-foreground: #2a3d38;
@@ -164,7 +176,7 @@ body {
 		--selection-color: hsl(0, 0%, 95%); */
 
 		--selection-background: hsl(20, 100%, 50%);
-  --selection-color: hsl(0, 0%, 95%);
+		--selection-color: hsl(0, 0%, 95%);
 
 		/* --selection-background: hsl(200, 100%, 50%);
   --selection-color: hsl(0, 0%, 95%); */

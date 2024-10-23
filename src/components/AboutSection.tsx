@@ -60,7 +60,7 @@ const AboutSection = () => {
 
         {/* Bio Section */}
         <div className="md:w-1/2">
-          <p className="text-lg">
+          <p className="text-lg text-center md:text-start">
             Hey there, I'm Vishal! :] I'm a full stack developer with a focus on building scalable, efficient web applications.
             {/* With a keen eye for detail, I optimize code for functionality, type safety, and user experience.  */}
             I thrive on solving complex problems and delivering solutions that are both technically sound and user-friendly. Just casually losing my mind over blockchain and Rust.

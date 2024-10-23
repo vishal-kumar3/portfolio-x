@@ -1,5 +1,4 @@
 "use client"
-import React from 'react'
 import { Repo } from './WorkSection'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -9,11 +8,12 @@ import { projectClickEvent, ProjectEventName, socialClickEvent, SocialEventName 
 
 type props = {
   repo: Repo
+  key: string
 }
 
-const RepoCard = ({repo}: props) => {
+const RepoCard = ({repo, key}: props) => {
   return (
-    <div key={repo.repo} className="bg-card text-card-foreground p-4 rounded-[var(--radius)] flex flex-col justify-between">
+    <div key={key} className="card bg-card hover:bg-card-hover text-card-foreground hover:text-card-hover-foreground p-4 rounded-[var(--radius)] flex flex-col justify-between">
       <div>
         <div className="flex items-center justify-between mb-2">
           <Link
@@ -107,3 +107,58 @@ const RepoCard = ({repo}: props) => {
 }
 
 export default RepoCard
+
+// Compare this snippet from src/components/RepoCardSkeleton.tsx:
+export const RepoCardSkeleton = () => {
+  return (
+    <div className="card bg-card p-4 rounded-[var(--radius)] flex flex-col justify-between animate-pulse">
+      <div>
+        {/* Header with avatar and links */}
+        <div className="flex items-center justify-between mb-2">
+          {/* Owner info */}
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 bg-muted rounded-full" />
+            <div className="h-4 w-24 bg-muted rounded-md" />
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex items-center gap-4">
+            <div className="w-4 h-4 bg-muted rounded-md" />
+            <div className="w-4 h-4 bg-muted rounded-md" />
+          </div>
+        </div>
+
+        {/* Repository name */}
+        <div className="h-8 w-3/4 bg-muted rounded-md mb-2" />
+
+        {/* Description - Multiple lines */}
+        <div className="space-y-2 mb-4">
+          <div className="h-4 bg-muted rounded-md w-full" />
+          <div className="h-4 bg-muted rounded-md w-5/6" />
+          <div className="h-4 bg-muted rounded-md w-4/6" />
+        </div>
+      </div>
+
+      {/* Footer stats */}
+      <div className="flex items-center space-x-4">
+        {/* Language */}
+        <div className="flex items-center gap-2">
+          <div className="h-[11px] w-[11px] rounded-full bg-muted" />
+          <div className="h-4 w-16 bg-muted rounded-md" />
+        </div>
+
+        {/* Stars */}
+        <div className="flex items-center gap-2">
+          <div className="h-4 w-4 bg-muted rounded-md" />
+          <div className="h-4 w-8 bg-muted rounded-md" />
+        </div>
+
+        {/* Forks */}
+        <div className="flex items-center gap-2">
+          <div className="h-4 w-4 bg-muted rounded-md" />
+          <div className="h-4 w-8 bg-muted rounded-md" />
+        </div>
+      </div>
+    </div>
+  )
+}

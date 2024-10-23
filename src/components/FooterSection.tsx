@@ -21,7 +21,7 @@ export default function Footer() {
                     onClick={link.onclick}
                     className="text-text text-foreground transition-colors"
                   >
-                    {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-elavation-opp_one" })}
+                    {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-card-hover hover:text-card-hover-foreground" })}
                   </Link>
                 </Tooltip>
               ))

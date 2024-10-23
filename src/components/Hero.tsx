@@ -15,11 +15,11 @@ const ColorThemeToggle = dynamic(() => import('@/components/Theme/ColorThemeTogg
 
 const HeroSection = () => {
   const [tiltStyle, setTiltStyle] = useState({});
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  // const [isMounted, setIsMounted] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
+  // useEffect(() => {
+  //   setIsMounted(true)
+  // }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -43,10 +43,10 @@ const HeroSection = () => {
     <section id='#home' className="relative flex flex-col md:gap-8 md:flex-row justify-between items-center py-10 md:py-20 overflow-hidden md:px-8">
       {/* Left part */}
       <div className="relative flex-1 z-10 max-w-xl mb-10 md:mb-0">
-        {
+        {/* {
           !isMounted ?
             <VishalFallback />
-            :
+            : */}
             <Tooltip tip='Change Color Theme'>
               <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
                 <ColorThemeToggle>
@@ -60,8 +60,8 @@ const HeroSection = () => {
                 </span>
               </h1>
             </Tooltip>
-        }
-        <p className="~text-[22px]/[26px] mb-6 opacity-80">
+        {/* } */}
+        <p className="text-[22px] md:text-[24px] lg:text-[26px] mb-6 opacity-80">
           Innovative Full Stack Wizard.
           <br />
           Bridging the gap between innovation and functionality.
@@ -78,7 +78,7 @@ const HeroSection = () => {
                   onClick={link.onclick}
                   className="text-text transition-colors"
                 >
-                  {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-elavation-opp_one" })}
+                  {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-card-hover hover:text-card-hover-foreground" })}
                 </Link>
               </Tooltip>
             ))

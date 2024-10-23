@@ -11,7 +11,7 @@ interface ColorThemeToggleProps {
 }
 
 export default function ColorThemeToggle({ className, children }: ColorThemeToggleProps) {
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
   const [colorTheme, setColorTheme] = useState<'default' | 'blue'>('default')
 
   const toggleColorTheme = () => {

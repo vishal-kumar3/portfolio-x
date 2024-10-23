@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import Image from 'next/image'
 import Link from "next/link";
 import { BiHome } from "react-icons/bi";
 import { IoInformation } from "react-icons/io5";
 import { CgWorkAlt } from "react-icons/cg";
 import { cn } from "../lib/utils";
 import { buttonClickEvent, ButtonEventName } from "@/utils/posthog";
+import { PiFlaskFill } from "react-icons/pi";
 
 const navigationTabs = [
   {
@@ -15,34 +15,46 @@ const navigationTabs = [
     topTitle: "/",
     title: "Home",
     icon: <BiHome />,
-    onclick: () => {buttonClickEvent(ButtonEventName.HomeNavbar)}
+    onclick: () => { buttonClickEvent(ButtonEventName.HomeNavbar) }
   },
   {
     href: "/#about",
     topTitle: "about",
     title: "About",
     icon: <IoInformation />,
-    onclick: () => {buttonClickEvent(ButtonEventName.AboutNavbar)}
+    onclick: () => { buttonClickEvent(ButtonEventName.AboutNavbar) }
+  },
+  {
+    href: "/#skill",
+    topTitle: "skill",
+    title: "Skill",
+    icon: <PiFlaskFill />,
+    onclick: () => {buttonClickEvent(ButtonEventName.SkillButton) }
   },
   {
     href: "/#work",
     topTitle: "work",
     title: "Work",
     icon: <CgWorkAlt />,
-    onclick: () => {buttonClickEvent(ButtonEventName.WorkNavbar)}
+    onclick: () => { buttonClickEvent(ButtonEventName.WorkNavbar) }
   }
 ]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 0);
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
+    setScrolled(window.scrollY > 0);
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -79,7 +91,7 @@ export default function Header() {
                   key={tab.title}
                   href={tab.href}
                   onClick={tab.onclick}
-                  className="text-card-foreground flex flex-col items-center gap-2 hover:text-saffron-500 transition-colors px-4 py-2"
+                  className="text-card-foreground rounded-md flex flex-col items-center gap-2 hover:bg-card-hover hover:text-card-hover-foreground transition-colors px-4 py-2"
                 >
                   <div>{tab.icon}</div>
                   <div>{tab.title}</div>
@@ -89,14 +101,16 @@ export default function Header() {
           </div>
         </nav>
       </header>
+
       <Link
         href='/resume.pdf'
         target="_blank"
         onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
-        className="hidden sm:fixed z-50 hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-3 right-5 size-10 sm:flex justify-center items-center rounded-full border border-border overflow-hidden"
+        className="hidden sm:fixed z-50 bg-[#94b8ff] text-card-foreground hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-5 right-5 size-10 sm:flex justify-center items-center rounded-full overflow-hidden"
       >
-        VK
+        CV
       </Link>
+      {/* <SpicyResumeLink buttonClickEvent={() => buttonClickEvent(ButtonEventName.ResumeButton)} /> */}
     </>
   );
 }
