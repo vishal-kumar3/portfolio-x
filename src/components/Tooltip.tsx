@@ -1,31 +1,57 @@
-import { cn } from "../lib/utils";
+'use client'
+
+import React, { useState } from 'react'
+import { cn } from "@/lib/utils"
+
+type Direction = 'top' | 'right' | 'bottom' | 'left'
 
 interface TooltipProps {
-  tip: string;
-  active?: boolean;
-  children: React.ReactNode;
+  tip: string
+  direction?: Direction
+  children: React.ReactNode
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ tip, active, children }) => {
-  return (
-    <div className="relative inline-block group">
-      <p
-        style={{
-          transition:
-            "opacity 0.2s ease-in-out, visibility 0.2s ease-in-out, margin-top 0.2s ease-in-out",
-        }}
-        className={cn(
-          "font-normal font-jetbrains text-sm group-hover:opacity-100 group-hover:-mt-2 absolute inline-block whitespace-nowrap opacity-0 left-[50%] top-0 leading-normal translate-x-[-50%] translate-y-[-120%] py-[0.15rem] px-[.5rem] rounded-[6px] bg-popover text-popover-foreground text-[.9rem] tracking-[-.075em] after:border-solid after:border-transparent after:border-l-[10px] after:border-r-[10px] after:border-t-[10px] after:border-t-accent after:-bottom-2 after:content-[' '] after:h-0 after:w-0 after:left-[50%] after:ml-[-10px] after:absolute focus-visible:opacity-100 focus-visible:visible focus-visible:-mt-2",
-          {
-            "opacity-100 -mt-2": active,
-          }
-        )}
-      >
-        {tip}
-      </p>
-      {children}
-    </div>
-  );
-};
+export default function Tooltip({ tip, direction = 'top', children }: TooltipProps) {
+  const [isVisible, setIsVisible] = useState(false)
 
-export default Tooltip;
+  const getTooltipClasses = (dir: Direction) => {
+    const baseClasses = "pointer-events-none absolute z-[99999] whitespace-nowrap py-1 px-2 rounded bg-popover text-popover-foreground text-sm transition-opacity duration-200 ease-in-out"
+
+    const directionClasses = {
+      top: "bottom-full left-1/2 -translate-x-1/2 mb-2",
+      right: "left-full top-1/2 -translate-y-1/2 ml-2",
+      bottom: "top-full left-1/2 -translate-x-1/2 mt-2",
+      left: "right-full top-1/2 -translate-y-1/2 mr-2"
+    }
+
+    const arrowClasses = {
+      top: "after:top-full after:left-1/2 after:-ml-1 after:border-t-4 after:border-x-transparent after:border-x-4",
+      right: "after:right-full after:top-1/2 after:-mt-1 after:border-r-4 after:border-y-transparent after:border-y-4",
+      bottom: "after:bottom-full after:left-1/2 after:-ml-1 after:border-b-4 after:border-x-transparent after:border-x-4",
+      left: "after:left-full after:top-1/2 after:-mt-1 after:border-l-4 after:border-y-transparent after:border-y-4"
+    }
+
+    return cn(
+      baseClasses,
+      directionClasses[dir],
+      "after:absolute after:border-popover",
+      arrowClasses[dir],
+      isVisible ? "opacity-100 visible" : "opacity-0 invisible"
+    )
+  }
+
+  return (
+    <div
+      className="relative inline-flex"
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
+      onFocus={() => setIsVisible(true)}
+      onBlur={() => setIsVisible(false)}
+    >
+      {children}
+      <div className={getTooltipClasses(direction)}>
+        {tip}
+      </div>
+    </div>
+  )
+}

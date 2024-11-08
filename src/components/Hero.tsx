@@ -1,12 +1,11 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { dataLinks } from '../data/links';
 import ThemeToggle from './Theme/ThemeToggle';
 import Tooltip from './Tooltip';
 import dynamic from 'next/dynamic'
-import VishalFallback from './VishalFallback';
 import { buttonClickEvent, ButtonEventName } from '@/utils/posthog';
 
 const ColorThemeToggle = dynamic(() => import('@/components/Theme/ColorThemeToggle'), {
@@ -15,11 +14,6 @@ const ColorThemeToggle = dynamic(() => import('@/components/Theme/ColorThemeTogg
 
 const HeroSection = () => {
   const [tiltStyle, setTiltStyle] = useState({});
-  // const [isMounted, setIsMounted] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   setIsMounted(true)
-  // }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -42,26 +36,21 @@ const HeroSection = () => {
   return (
     <section id='#home' className="relative flex flex-col md:gap-8 md:flex-row justify-between items-center py-10 md:py-20 overflow-hidden md:px-8">
       {/* Left part */}
-      <div className="relative flex-1 z-10 max-w-xl mb-10 md:mb-0">
-        {/* {
-          !isMounted ?
-            <VishalFallback />
-            : */}
-            <Tooltip tip='Change Color Theme'>
-              <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
-                <ColorThemeToggle>
-                  Visha
-                </ColorThemeToggle>
-                <span className="relative inline-flex items-center justify-center">
-                  <ColorThemeToggle>
-                    <span className="relative z-10 pr-[0.4rem]">l</span>
-                  </ColorThemeToggle>
-                  <ThemeToggle size={20} className="absolute z-50 animate-[bounce_1s_ease-in-out_infinite] -top-3 mx-auto" />
-                </span>
-              </h1>
-            </Tooltip>
-        {/* } */}
-        <p className="text-[22px] md:text-[24px] lg:text-[26px] mb-6 opacity-80">
+      <div className="relative flex flex-col items-center md:items-start z-10  pb-10 md:pb-0">
+        <Tooltip tip='Click on Vishal to find Easter egg🥚' direction='bottom'>
+          <h1 className="group text-7xl z-5 md:text-8xl tracking-tighter font-bold mb-4 text-primary">
+            <ColorThemeToggle>
+              Visha
+            </ColorThemeToggle>
+            <span className="relative z-10 inline-flex items-center justify-center">
+              <ColorThemeToggle>
+                <span className="relative z-10 pr-[0.4rem]">l</span>
+              </ColorThemeToggle>
+              <ThemeToggle size={20} className="absolute z-50 animate-[bounce_1s_ease-in-out_infinite] -top-3 mx-auto" />
+            </span>
+          </h1>
+        </Tooltip>
+        <p className="text-[22px] md:text-[24px] lg:text-[26px] mb-6 opacity-80 text-center md:text-start">
           Innovative Full Stack Wizard.
           <br />
           Bridging the gap between innovation and functionality.
@@ -78,28 +67,26 @@ const HeroSection = () => {
                   onClick={link.onclick}
                   className="text-text transition-colors"
                 >
-                  {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md hover:bg-card-hover hover:text-card-hover-foreground" })}
+                  {link.icon({ size: 24, className: "w-[40px] h-[40px] p-2 rounded-md group-hover:bg-card-hover group-hover:text-card-hover-foreground" })}
                 </Link>
               </Tooltip>
             ))
           }
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="sm:hidden">
-            <Link
-              href='/resume.pdf'
-              target="_blank"
-              onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
-              className="sm:block bg-card text-card-foreground flex items-center justify-center sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group"
-            >
-              <span className="relative z-10">Resume 📝</span>
-              <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
-            </Link>
-          </div>
+        <div className="flex flex-col lg:flex-row gap-2">
+          <Link
+            href='/resume.pdf'
+            target="_blank"
+            onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
+            className="bg-card text-card-foreground flex items-center  justify-center text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground group-hover:bg-opacity-80 transition-colors relative overflow-hidden group"
+          >
+            <span className="relative z-10">Resume 📝</span>
+            <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
+          </Link>
           <Link
             href='/#work'
             onClick={() => buttonClickEvent(ButtonEventName.DiscoverMyWorkButton)}
-            className="bg-card text-card-foreground flex items-center justify-center sm:block sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground hover:bg-opacity-80 transition-colors relative overflow-hidden group"
+            className="bg-card text-card-foreground flex items-center justify-center sm:block sm:w-fit text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground group-hover:bg-opacity-80 transition-colors relative overflow-hidden group"
           >
             <span className="relative z-10">Discover my work 💼 ↓</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
@@ -119,10 +106,10 @@ const HeroSection = () => {
         >
           <Image
             src='/vishalkumar.jpg'
-            width={400}
-            height={400}
+            width={500}
+            height={500}
             alt='Vishal Kumar'
-            className='hidden md:block w-full h-full object-cover object-right scale-125 transition-transform hover:scale-110 aspect-square'
+            className='hidden md:block w-full h-full object-cover object-right scale-125 transition-transform group-hover:scale-110 aspect-square'
           />
           {/* <div className='transition-transform hover:scale-105 aspect-square bg-blue-300 hidden md:block ~size-[250px]/[400px]'></div> */}
         </div>

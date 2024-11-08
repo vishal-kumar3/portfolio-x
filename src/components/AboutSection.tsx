@@ -43,7 +43,7 @@ const AboutSection = () => {
       <div className="md:flex md:space-x-4 md:items-center">
         {/* Activity Section */}
         <div className="mb-4 text-lg md:mb-0 md:w-1/2">
-          <div className="flex items-center gap-6 sm:gap-20 md:gap-8">
+          <div className="flex justify-center items-center gap-6 sm:gap-10 md:gap-8">
             <Image src={activityImage} width={128} height={128} alt='Kya pta' className='size-[8rem] rounded-[18px] bg-[#422006]' />
             <div className='leading-6'>
               <p className="text-xl leading-6 font-semibold text-foreground">@{username}</p>
@@ -51,9 +51,14 @@ const AboutSection = () => {
                 <Clock size={15} className="text-lg" />
                 {discordOnline}
               </p>
-              <p className="text-md text-foreground">
-                {currTime}
-              </p>
+              <div className="sm:flex sm:flex-row sm:gap-2 text-md text-foreground">
+                <p>
+                  {currTime.split(",")[0]}
+                </p>
+                <p>
+                  {currTime.split(",")[1]}
+                </p>
+              </div>
             </div>
           </div>
         </div>

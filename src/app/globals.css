@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 :root {
+  --text-theme: #000000; /* Default primary color */
+}
+
+.blue-theme {
+  --text-theme: #0066CC; /* Blue theme primary color */
+}
+
+:root {
 	--font-space-grotesk: 'Space Grotesk';
 	--font-roboto: 'Roboto', sans-serif;
 	--font-inter: 'Inter', sans-serif;
@@ -68,7 +76,7 @@ body {
 		--foreground: #1a1a1a;
 		--elavation-one: #1a1a1a1a;
 		--elavation-two: #1a1a1a4a;
-		--elavation-opp-one: #f5f5f575;
+		--elavation-opp-one: #CDD8FF;
 		--elavation-opp-two: #f5f5f54a;
 		--card: #e0e0e0;
 		--card-hover: #d0d0d0; /* Slightly darker than --card for hover effect */

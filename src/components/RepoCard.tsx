@@ -46,7 +46,7 @@ const RepoCard = ({repo, key}: props) => {
                 </Tooltip>
               )
             }
-            <Tooltip tip={`${repo.link}`}>
+            <Tooltip tip={`${repo.link.replace("https://github.com/", "")}`}>
               <Link
                 href={repo.link}
                 onClick={() => projectClickEvent(ProjectEventName.Repo, repo.repo)}

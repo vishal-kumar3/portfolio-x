@@ -8,6 +8,7 @@ import { CgWorkAlt } from "react-icons/cg";
 import { cn } from "../lib/utils";
 import { buttonClickEvent, ButtonEventName } from "@/utils/posthog";
 import { PiFlaskFill } from "react-icons/pi";
+import Tooltip from "./Tooltip";
 
 const navigationTabs = [
   {
@@ -29,7 +30,7 @@ const navigationTabs = [
     topTitle: "skill",
     title: "Skill",
     icon: <PiFlaskFill />,
-    onclick: () => {buttonClickEvent(ButtonEventName.SkillButton) }
+    onclick: () => { buttonClickEvent(ButtonEventName.SkillButton) }
   },
   {
     href: "/#work",
@@ -101,15 +102,18 @@ export default function Header() {
           </div>
         </nav>
       </header>
-
-      <Link
-        href='/resume.pdf'
-        target="_blank"
-        onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
-        className="hidden sm:fixed z-50 bg-[#94b8ff] text-card-foreground hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-5 right-5 size-10 sm:flex justify-center items-center rounded-full overflow-hidden"
-      >
-        CV
-      </Link>
+      <div className="hidden sm:fixed z-50 top-5 right-5 size-10 sm:flex">
+        <Tooltip tip="Resume.pdf" direction="left">
+          <Link
+            href='/resume.pdf'
+            target="_blank"
+            onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
+            className="hidden sm:fixed z-50 bg-[#94b8ff] text-card-foreground hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-5 right-5 size-10 sm:flex justify-center items-center rounded-full overflow-hidden"
+          >
+            CV
+          </Link>
+        </Tooltip>
+      </div>
       {/* <SpicyResumeLink buttonClickEvent={() => buttonClickEvent(ButtonEventName.ResumeButton)} /> */}
     </>
   );
