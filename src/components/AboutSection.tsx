@@ -19,10 +19,10 @@ const AboutSection = () => {
   }, []);
 
   useEffect(() => {
-    if (!data) return setActivityImage("/question.jpg");
-
-    setUsername(data?.discord_user.username)
-    setDiscordOnline(data?.discord_status)
+    if (!data || Object.keys(data).length === 0) return setActivityImage("/question.jpg");
+    console.log("data:- ", data)
+    setUsername(data.discord_user.username)
+    setDiscordOnline(data.discord_status)
     setActivityImage(`https://cdn.discordapp.com/avatars/${process.env.NEXT_PUBLIC_DISCORD_ID}/${data?.discord_user.avatar}.png?size=512`)
   }, [data])
 

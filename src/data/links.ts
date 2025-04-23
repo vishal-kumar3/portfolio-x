@@ -45,3 +45,5 @@ export const dataLinks = [
     onclick: () => {socialClickEvent(SocialEventName.Leetcode)}
   },
 ]
+
+export const resumeLink = process.env.RESUME_LINK || 'https://drive.google.com/file/d/1GQfXykBrVEkqtUA0At2grxlJhytCCyvH/view'

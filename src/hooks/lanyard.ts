@@ -7,7 +7,6 @@ export function useDiscord() {
     userId,
     socket: true,
   });
-
   return {
     ...result,
   };

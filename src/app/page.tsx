@@ -5,6 +5,7 @@ import Footer from "../components/FooterSection";
 import Header from "../components/Header";
 import HeroSection from "../components/Hero";
 import WorkSection from "../components/WorkSection";
+import Timeline from "../components/Timeline";
 
 // export const dynamic = 'force-dynamic'
 
@@ -17,6 +18,7 @@ export default function Home() {
         <AboutSection />
         <SkillsShowcase />
         <WorkSection />
+        <Timeline />
         <Footer />
       </div>
     </main>

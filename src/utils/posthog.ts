@@ -7,7 +7,8 @@ export enum ButtonEventName {
   WorkNavbar = "Button: WorkNavbar",
   DiscoverMyWorkButton = "Button: DiscoverMyWorkButton",
   ResumeButton = "Button: ResumeButton",
-  SkillButton = "Button: SkillButton"
+  SkillButton = "Button: SkillButton",
+  TimelineButton = "Button: TimelineButton",
 }
 
 export enum SocialEventName {

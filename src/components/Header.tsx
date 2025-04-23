@@ -9,6 +9,8 @@ import { cn } from "../lib/utils";
 import { buttonClickEvent, ButtonEventName } from "@/utils/posthog";
 import { PiFlaskFill } from "react-icons/pi";
 import Tooltip from "./Tooltip";
+import { resumeLink } from "../data/links";
+import { Clock } from "lucide-react";
 
 const navigationTabs = [
   {
@@ -38,7 +40,15 @@ const navigationTabs = [
     title: "Work",
     icon: <CgWorkAlt />,
     onclick: () => { buttonClickEvent(ButtonEventName.WorkNavbar) }
-  }
+  },
+  {
+    href: "/#timeline",
+    topTitle: "timeline",
+    title: "Timeline",
+    icon: <Clock />,
+    onclick: () => { buttonClickEvent(ButtonEventName.TimelineButton) }
+  },
+
 ]
 
 export default function Header() {
@@ -63,7 +73,7 @@ export default function Header() {
       <header className="flex items-center justify-center transition-all duration-300">
         <nav
           className={cn(
-            "fixed top-2 z-50 text-xl border hidden md:flex md:w-[550px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out",
+            "fixed top-2 z-50 text-xl border hidden md:flex md:w-[610px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out",
             scrolled ? "shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] border-elavation-opp_one backdrop-filter backdrop-blur-sm webkit_backdrop_filter_15px rounded-[10px]" : "border-transparent"
           )}
           style={{
@@ -105,7 +115,7 @@ export default function Header() {
       <div className="hidden sm:fixed z-50 top-5 right-5 size-10 sm:flex">
         <Tooltip tip="Resume.pdf" direction="left">
           <Link
-            href='/resume.pdf'
+            href={resumeLink}
             target="_blank"
             onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
             className="hidden sm:fixed z-50 bg-[#94b8ff] text-card-foreground hover:animate-none animate-[spin_3s_linear_infinite] text-md font-bold top-5 right-5 size-10 sm:flex justify-center items-center rounded-full overflow-hidden"

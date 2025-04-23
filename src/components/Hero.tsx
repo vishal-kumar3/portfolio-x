@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { dataLinks } from '../data/links';
+import { dataLinks, resumeLink } from '../data/links';
 import ThemeToggle from './Theme/ThemeToggle';
 import Tooltip from './Tooltip';
 import dynamic from 'next/dynamic'
@@ -74,15 +74,15 @@ const HeroSection = () => {
           }
         </div>
         <div className="flex flex-col lg:flex-row gap-2">
-          <Link
-            href='/resume.pdf'
+          {/* <Link
+            href={resumeLink}
             target="_blank"
             onClick={() => buttonClickEvent(ButtonEventName.ResumeButton)}
             className="bg-card text-card-foreground flex items-center  justify-center text-xl md:text-2xl px-6 py-3 rounded-xl border border-card-foreground group-hover:bg-opacity-80 transition-colors relative overflow-hidden group"
           >
             <span className="relative z-10">Resume 📝</span>
             <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-20 transition-opacity"></div>
-          </Link>
+          </Link> */}
           <Link
             href='/#work'
             onClick={() => buttonClickEvent(ButtonEventName.DiscoverMyWorkButton)}
@@ -109,7 +109,7 @@ const HeroSection = () => {
             width={500}
             height={500}
             alt='Vishal Kumar'
-            className='hidden md:block w-full h-full object-cover object-right scale-125 transition-transform group-hover:scale-110 aspect-square'
+            className='hidden md:block w-full h-full object-cover scale-125 transition-transform group-hover:scale-110 aspect-square'
           />
           {/* <div className='transition-transform hover:scale-105 aspect-square bg-blue-300 hidden md:block ~size-[250px]/[400px]'></div> */}
         </div>
