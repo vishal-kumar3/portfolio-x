@@ -43,10 +43,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://vishalkumar.wiki'
+const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://vishalkumar.space'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
+  metadataBase: new URL(baseUrl!),
   title: {
     default: "Vishal Kumar | Full Stack Developer",
     template: "%s | Vishal Kumar"
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: process.env.GOOGLE_VERIFICATION_CODE || 'your-google-site-verification-code',  // Replace with your actual verification code
+    google: process.env.GOOGLE_VERIFICATION_CODE,  // Replace with your actual verification code
   },
   other: {
     'og:image:width': '1200',
