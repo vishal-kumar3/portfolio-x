@@ -1,22 +1,46 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'cdn.discordapp.com',
-			},
-			{
-				protocol: 'https',
-				hostname: 'opengraph.githubassets.com',
-			},
-			{
-				protocol: 'https',
-				hostname: 'github.com',
-			},
-		],
-	},
- async rewrites() {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+      },
+      {
+        protocol: "https",
+        hostname: "opengraph.githubassets.com",
+      },
+      {
+        protocol: "https",
+        hostname: "github.com",
+      },
+      {
+        protocol: "https",
+        hostname: "thefiel.com",
+      },
+      {
+        protocol: "https",
+        hostname: "esponews.in",
+      },
+      {
+        protocol: "https",
+        hostname: "framerusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "sih.gov.in",
+      },
+      {
+        protocol: "https",
+        hostname: "hacktoberfest.com",
+      },
+      {
+        protocol: "https",
+        hostname: "hackbyte.in",
+      },
+    ],
+  },
+  async rewrites() {
     return [
       {
         source: "/ingest/static/:path*",
@@ -33,7 +57,7 @@ const nextConfig = {
     ];
   },
   // This is required to support PostHog trailing slash API requests
-  skipTrailingSlashRedirect: true, 
+  skipTrailingSlashRedirect: true,
 };
 
 export default nextConfig;
