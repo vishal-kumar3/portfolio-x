@@ -58,4 +58,4 @@ export const dataLinks = [
 
 export const resumeLink =
   process.env.RESUME_LINK ||
-  "https://drive.google.com/drive/u/0/folders/1mxfRr8upFNjvUZKQQumeMrEPRULT02Jp";
+  "https://drive.google.com/file/d/1Pe8675ZCnk1q1LxbSuq1HYaQVzMvv5ry/view?usp=drive_link";
