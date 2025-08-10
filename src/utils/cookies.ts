@@ -1,9 +1,9 @@
 // src/utils/cookies.ts
 
-import { cookies } from 'next/headers'; // Next.js has built-in utilities for cookies
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers'; // Next.js has built-in utilities for cookies
 
 export function getDistinctId() {
-  const cookieStore = cookies();
+  const cookieStore = (cookies() as unknown as UnsafeUnwrappedCookies);
   let distinctId = cookieStore.get('distinctId')?.value;
 
   if (!distinctId) {
