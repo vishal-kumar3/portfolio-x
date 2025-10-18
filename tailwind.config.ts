@@ -53,7 +53,8 @@ const config: Config = {
     },
   },
   plugins: [
-    fluid
+    fluid,
+    require("tailwindcss-animate")
   ],
 };
 export default config;
