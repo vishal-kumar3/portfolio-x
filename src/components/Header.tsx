@@ -82,7 +82,7 @@ export default function Header() {
       <header className="flex items-center justify-center transition-all duration-300">
         <nav
           className={cn(
-            "fixed top-2 z-50 text-xl border hidden md:flex md:w-[670px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out",
+            "fixed top-2 z-50 text-xl border hidden md:flex md:w-[715px] md:h-[70px] rounded-lg md:px-10 items-center justify-around space-x-6 transition-all duration-300 ease-in-out",
             scrolled
               ? "shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] border-elavation-opp_one backdrop-filter backdrop-blur-sm webkit_backdrop_filter_15px rounded-[10px]"
               : "border-transparent",
