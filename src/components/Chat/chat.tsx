@@ -1,19 +1,97 @@
 "use client"
 import { ChatInterface } from "@/components/Chat/chat-interface"
 import { ChatToggleButton } from "@/components/Chat/chat-toggle"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import type { Message } from "./chat-interface"
+import { getUserIdStorage } from "@/utils/localstorage"
+
+type chat_history = {
+  chat_history: any
+}
+
+async function fetchChatHistory(userId: string): Promise<chat_history> {
+  try {
+    const response = await fetch(`http://localhost:8000/chat_history/${userId}`)
+    if (!response.ok) throw new Error('Failed to fetch chat history')
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching chat history:', error)
+    return { chat_history: [] }
+  }
+}
+
+const splitMessageAndTime = (message: string | null | undefined): { content: string | null, timestamp: Date | null } => {
+  if (message) {
+    const match = message.match(/\[(.*?)\]:\s*([\s\S]*)/)
+    if (match) {
+      const [, timestamp, content] = match
+      return { content: content.trim(), timestamp: new Date(timestamp) }
+    }
+  }
+  return { content: null, timestamp: null }
+}
 
 export default function Chat() {
   const [isChatOpen, setIsChatOpen] = useState(false)
+  const [chatHistory, setChatHistory] = useState<Message[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  if (isChatOpen && window.innerWidth < 768)
-    document.body.style.overflow = 'hidden'
-  else document.body.style.overflow = 'scroll'
+  useEffect(() => {
+    if (isChatOpen) {
+      const storedUserId = getUserIdStorage();
+      if (storedUserId) {
+        setIsLoading(true);
+        fetchChatHistory(storedUserId)
+          .then(history => {
+            const chat_history = history.chat_history;
+            if (chat_history && chat_history.length > 0) {
+
+              const messages: Message[] = chat_history.map((msg: { user?: string; Vishi?: string }, index: number) => ({
+                id: index.toString(),
+                sender: msg.user ? "user" : "vishi",
+                timestamp: splitMessageAndTime(msg.user).timestamp || splitMessageAndTime(msg.Vishi).timestamp,
+                content: splitMessageAndTime(msg.user).content || splitMessageAndTime(msg.Vishi).content
+              }));
+              setChatHistory(messages);
+            } else {
+              setChatHistory([{
+                id: "1",
+                content: "Hello! I'm Vishal's Portfolio Assistant. How can I help you?",
+                sender: "vishi",
+                timestamp: new Date(),
+              }]);
+            }
+          })
+          .finally(() => setIsLoading(false));
+      }
+    }
+  }, [isChatOpen])
+
+  useEffect(() => {
+    if (isChatOpen && window.innerWidth < 768) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'scroll'
+    }
+  }, [isChatOpen])
+
+  const handleClose = () => {
+    setIsChatOpen(false)
+    setChatHistory([])
+  }
+
+
 
   return (
     <div>
       <ChatToggleButton isOpen={isChatOpen} onClick={() => setIsChatOpen(!isChatOpen)} />
-      {isChatOpen && <ChatInterface onClose={() => setIsChatOpen(false)} />}
+      {isChatOpen && (
+        <ChatInterface
+          onClose={handleClose}
+          initialMessages={chatHistory}
+          isLoading={isLoading}
+        />
+      )}
     </div>
   )
 }

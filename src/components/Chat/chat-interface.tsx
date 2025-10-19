@@ -6,28 +6,45 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ChatMessage } from "./chat-message"
 import { QuickQuestions } from "./chat-quick-question"
+import { streamChat } from "@/utils/streamChat"
+import { setUserIdStorage } from "@/utils/localstorage"
 
-interface Message {
+export interface Message {
   id: string
   content: string
-  sender: "user" | "assistant"
+  sender: "user" | "vishi"
   timestamp: Date
 }
 
 interface ChatInterfaceProps {
   onClose: () => void
+  initialMessages?: Message[]
+  isLoading?: boolean
+  onUserIdReceived?: (userId: string) => void
 }
 
-export function ChatInterface({ onClose }: ChatInterfaceProps) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      content: "Hello! I'm Vishal's Portfolio Assistant. How can I help you?",
-      sender: "assistant",
-      timestamp: new Date(),
-    },
-  ])
+export function ChatInterface({
+  onClose,
+  initialMessages,
+  isLoading = false,
+  onUserIdReceived
+}: ChatInterfaceProps) {
+  const [messages, setMessages] = useState<Message[]>([])
+
+  useEffect(() => {
+    if (initialMessages && initialMessages.length > 0) {
+      setMessages(initialMessages);
+    } else {
+      setMessages([{
+        id: "1",
+        content: "Hello! I'm Vishal's Portfolio Assistant. How can I help you?",
+        sender: "vishi",
+        timestamp: new Date(),
+      }]);
+    }
+  }, [initialMessages])
   const [input, setInput] = useState("")
+  const cleanupRef = useRef<(() => void) | undefined>(undefined);
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -40,6 +57,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
 
   const handleSendMessage = (text: string) => {
     if (!text.trim()) return
+    cleanupRef.current?.()
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -49,18 +67,61 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
     }
 
     setMessages((prev) => [...prev, userMessage])
-    setInput("")
 
-    // Simulate assistant response
-    setTimeout(() => {
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: `Thanks for asking about "${text}". I'm here to help you learn more about Vishal's work and experience!`,
-        sender: "assistant",
-        timestamp: new Date(),
+    cleanupRef.current = streamChat({
+      query: userMessage.content,
+      onConnection: () => {
+        const vishiMessage: Message = {
+          id: Date.now().toString(),
+          content: "",
+          sender: "vishi",
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, vishiMessage])
+      },
+      onMessage: (msg: { type: string, content: string, userId: string }) => {
+        if (msg.userId) {
+          setUserIdStorage(msg.userId);
+          onUserIdReceived?.(msg.userId);
+        }
+
+        if (msg.type === "chunk") {
+          setMessages(prev => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage.sender === "vishi") {
+              const updatedMessages = [...prev];
+              updatedMessages[prev.length - 1] = {
+                ...lastMessage,
+                content: lastMessage.content + msg.content
+              };
+              return updatedMessages;
+            }
+            return prev;
+          });
+        }
+      },
+      onDone: () => {
+        setInput("");
+        scrollToBottom();
+      },
+      onError: (err) => {
+        // Only handle actual errors, not connection close events
+        if (err?.target?.readyState !== 2) {
+          setMessages(prev => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage.sender === "vishi") {
+              const updatedMessages = [...prev];
+              updatedMessages[prev.length - 1] = {
+                ...lastMessage,
+                content: lastMessage.content || "Sorry, there was an error connecting to the server. Please try again."
+              };
+              return updatedMessages;
+            }
+            return prev;
+          });
+        }
       }
-      setMessages((prev) => [...prev, assistantMessage])
-    }, 500)
+    })
   }
 
   const handleQuickQuestion = (question: string) => {
@@ -74,7 +135,6 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
         onClick={onClose}
         aria-hidden="true"
       />
-
       <div className="fixed z-50 flex items-center justify-center md:items-end md:justify-end p-0 md:p-4 pointer-events-none inset-0 md:inset-auto md:bottom-24 md:right-6">
         <div className="w-full md:max-w-lg h-[90%] md:h-[700px] mb-[80px] md:mb-0 flex flex-col bg-background rounded-none md:rounded-2xl border-0 md:border border-elavation-one shadow-2xl overflow-hidden pointer-events-auto animate-in fade-in slide-in-from-bottom-4 duration-300 md:slide-in-from-bottom-0">
           {/* Header */}
@@ -105,19 +165,26 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
 
           {/* Messages Container */}
           <div className="flex-1 overflow-y-auto p-4 md:p-3 space-y-4 md:space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent text-card-foreground">
-            {messages.map((message) => (
-              <ChatMessage key={message.id} message={message} />
-            ))}
+            {isLoading ? (
+              <div className="flex items-center justify-center h-full">
+                <div className="flex gap-2 items-center text-card-foreground/70">
+                  <span className="inline-block w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="inline-block w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="inline-block w-2 h-2 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            ) : (
+              messages.map((message) => (
+                <ChatMessage key={message.id} message={message} />
+              ))
+            )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area with Quick Questions */}
           <div className="bg-card border-t border-elavation-one p-2">
-            {/* Show quick questions only when there's just the initial message */}
             {messages.length === 1 && <QuickQuestions onSelect={handleQuickQuestion} />}
 
-            {/* Input Field */}
             <div className="flex gap-3">
               <Input
                 value={input}
