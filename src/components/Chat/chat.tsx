@@ -6,12 +6,13 @@ import { useState } from "react"
 export default function Chat() {
   const [isChatOpen, setIsChatOpen] = useState(false)
 
+  if (isChatOpen && window.innerWidth < 768)
+    document.body.style.overflow = 'hidden'
+  else document.body.style.overflow = 'scroll'
+
   return (
     <div>
-      {/* Chat Toggle Button */}
       <ChatToggleButton isOpen={isChatOpen} onClick={() => setIsChatOpen(!isChatOpen)} />
-
-      {/* Chat Modal */}
       {isChatOpen && <ChatInterface onClose={() => setIsChatOpen(false)} />}
     </div>
   )

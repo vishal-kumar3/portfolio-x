@@ -78,7 +78,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
       <div className="fixed z-50 flex items-center justify-center md:items-end md:justify-end p-0 md:p-4 pointer-events-none inset-0 md:inset-auto md:bottom-24 md:right-6">
         <div className="w-full md:max-w-lg h-[90%] md:h-[700px] mb-[80px] md:mb-0 flex flex-col bg-background rounded-none md:rounded-2xl border-0 md:border border-elavation-one shadow-2xl overflow-hidden pointer-events-auto animate-in fade-in slide-in-from-bottom-4 duration-300 md:slide-in-from-bottom-0">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 md:p-6 border-b border-elavation-one bg-card">
+          <div className="flex items-center justify-between p-4 md:p-2 border-b border-elavation-one bg-card">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-card-foreground font-bold text-lg">
@@ -104,7 +104,7 @@ export function ChatInterface({ onClose }: ChatInterfaceProps) {
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 md:space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent text-card-foreground">
+          <div className="flex-1 overflow-y-auto p-4 md:p-3 space-y-4 md:space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent text-card-foreground">
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}
