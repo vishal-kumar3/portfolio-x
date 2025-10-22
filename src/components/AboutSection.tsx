@@ -68,7 +68,7 @@ const AboutSection = () => {
         {/* Bio Section */}
         <div className="md:w-1/2">
           <p className="text-lg text-center md:text-start">
-            Hey there, I'm Vishal! I'm a full stack developer with a focus on
+            Hey there, I&apos;m Vishal! I&apos;m a full stack developer with a focus on
             building backend systems scalable and efficient.
             {/* With a keen eye for detail, I optimize code for functionality, type safety, and user experience.  */}
             I thrive on solving complex problems and delivering solutions that
