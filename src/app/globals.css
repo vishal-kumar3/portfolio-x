@@ -3,24 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --text-theme: #000000; /* Default primary color */
-}
+  /* Typography */
+  --font-space-grotesk: 'Space Grotesk';
+  --font-roboto: 'Roboto', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 
-.blue-theme {
-  --text-theme: #0066CC; /* Blue theme primary color */
-}
+  /* Theme Colors */
+  --theme-primary: #000000; /* Default primary color */
+  --theme-secondary: #666666;
+  --theme-accent: #0066CC;
 
-:root {
-	--font-space-grotesk: 'Space Grotesk';
-	--font-roboto: 'Roboto', sans-serif;
-	--font-inter: 'Inter', sans-serif;
-}
-
-:root {
-	--selection-background-light: hsl(210, 100%, 80%); /* Light background */
-	--selection-color-light: hsl(210, 80%, 25%); /* Dark text */
-	--selection-background-dark: hsl(210, 80%, 50%); /* Dark background */
-	--selection-color-dark: hsl(220, 80%, 95%); /* Light text */
+  /* Selection Colors */
+  --selection-background: hsl(210, 95%, 85%);
+  --selection-color: hsl(210, 80%, 15%);
 }
 
 /* .light ::selection {
@@ -165,19 +160,34 @@ body {
 
 	.blue-theme.dark {
 		/* --primary: #0D0D0D; */
-		--background: #03346e;
+		/* --background: #03346e;
 		--foreground: #cdd8ff;
 		--elavation-one: #03346e3a;
 		--elavation-two: #03346eca;
 		--elavation-opp-one: #cdd8ff3a;
 		--elavation-opp-two: #cdd8ffca;
 		--card: #c2d1ff;
-		--card-hover: #d6e1ff; /* Slightly lighter than --card for hover effect */
+		--card-hover: #d6e1ff;
 		--card-hover-foreground: #03346e;
 		--card-foreground: #1c1c1c;
 		--popover: #b4d6cd;
-		--popover-foreground: #2a3d38;
-		--radius: 0.5rem;
+		--popover-foreground: #2a3d38; */
+
+--background: #1d2021;
+--foreground: #ebdbb2;
+--elevation-one: #282828;
+--elevation-two: #3c3836;
+--elevation-opp-one: #458588;
+--elevation-opp-two: #83a598;
+--card: #282828;
+--card-hover: #3c3836;
+--card-hover-foreground: #fbf1c7;
+--card-foreground: #d5c4a1;
+--popover: #282828;
+--popover-foreground: #fbf1c7;
+
+
+    --radius: 0.5rem;
 
 		/* Selection Styles */
 		/* --selection-background: hsl(210, 80%, 40%);
@@ -277,4 +287,13 @@ body {
   background-color: var(--elavation-opp-one);
   transform: scale(1.05);
   transition: transform 0.3s ease, background-color 0.3s ease;
+} */
+/*
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 } */

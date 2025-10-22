@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import fluid, { extract } from 'fluid-tailwind'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   darkMode: "class",
@@ -53,7 +54,9 @@ const config: Config = {
     },
   },
   plugins: [
-    fluid
+    fluid,
+    require("tailwindcss-animate"),
+    typography
   ],
 };
 export default config;
