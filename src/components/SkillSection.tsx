@@ -2,7 +2,7 @@
 import { IconType } from 'react-icons'
 import {
   SiNextdotjs, SiTypescript,
-  SiNodedotjs,
+  SiNodedotjs
 } from 'react-icons/si'
 import {
   FaChartBar,

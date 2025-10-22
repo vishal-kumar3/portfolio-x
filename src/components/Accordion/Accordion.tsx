@@ -70,7 +70,7 @@ export function AccordionItem({
     if (defaultOpen && !isOpen) {
       toggleItem(id);
     }
-  }, [id]);
+  }, [defaultOpen, isOpen, toggleItem, id]);
 
   return (
     <>

@@ -59,7 +59,7 @@ const experienceData = [
       </>,
       <>
         Created <Highlight>analytics platform</Highlight> for admins leveraging{" "}
-        <Highlight>mongoDB's aggregation pipelines</Highlight>.
+        <Highlight>mongoDB&apos;s aggregation pipelines</Highlight>.
       </>,
     ],
     company: "Fiel",

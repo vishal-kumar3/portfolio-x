@@ -29,20 +29,19 @@ export function ChatMessage({ message }: { message: Message }) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                // Style links
-                a: (props) => (
-                  <a {...props} className="text-blue-500 hover:text-blue-600 no-underline" target="_blank" rel="noopener noreferrer" />
+                a: ({ children, ...props }) => (
+                  <a {...props} className="text-blue-500 hover:text-blue-600 no-underline" target="_blank" rel="noopener noreferrer">
+                    {children}
+                  </a>
                 ),
-                // Style code blocks
-                code: ({ className, children, ...props }: any) => (
+                code: ({ className, children, ...props }) => (
                   <code
-                    className={`${className} ${props.inline ? 'bg-card-hover px-1 py-0.5 rounded text-sm' : ''}`}
+                    className={`${className || ''} bg-card-hover px-1 py-0.5 rounded text-sm`}
                     {...props}
                   >
                     {children}
                   </code>
                 ),
-                // Style pre blocks (code blocks)
                 pre: ({ children, ...props }) => (
                   <pre className="rounded-lg p-4 overflow-x-auto text-sm my-2" {...props}>
                     {children}

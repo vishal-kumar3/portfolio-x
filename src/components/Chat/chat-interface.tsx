@@ -118,9 +118,11 @@ export function ChatInterface({
           inputRef.current?.focus();
         }, 100);
       },
-      onError: (err) => {
+      onError: (err: unknown) => {
         // Only handle actual errors, not connection close events
-        if (err?.target?.readyState !== 2) {
+        if (err && typeof err === 'object' && 'target' in err && 
+            err.target && typeof err.target === 'object' && 'readyState' in err.target && 
+            typeof err.target.readyState === 'number' && err.target.readyState !== 2) {
           setMessages(prev => {
             const lastMessage = prev[prev.length - 1];
             if (lastMessage.sender === "vishi") {
