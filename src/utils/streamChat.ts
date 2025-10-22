@@ -1,21 +1,22 @@
-import { getUserIdStorage } from "@/utils/localstorage";
+
 
 export function streamChat({
   query,
+  userId,
   onConnection,
   onMessage,
   onError,
   onDone,
 }: {
   query: string;
+  userId: string;
   onConnection: () => void
   onMessage: (msg: { type: string, content: string, userId: string }) => void;
   onError?: (err: any) => void;
   onDone?: () => void;
 }) {
-  const url = new URL("http://localhost:8000/query");
+  const url = new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}/query`);
   url.searchParams.set("query", query);
-  const userId = getUserIdStorage()
   if (userId?.length) url.searchParams.set("userId", userId);
 
   let eventSource: EventSource;
@@ -24,7 +25,7 @@ export function streamChat({
     eventSource = new EventSource(url.toString());
   } catch (error) {
     onError?.(error);
-    return () => {};
+    return () => { };
   }
 
   eventSource.onopen = () => {

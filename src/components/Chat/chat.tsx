@@ -4,21 +4,7 @@ import { ChatToggleButton } from "@/components/Chat/chat-toggle"
 import { useState, useEffect } from "react"
 import type { Message } from "./chat-interface"
 import { getUserIdStorage } from "@/utils/localstorage"
-
-type chat_history = {
-  chat_history: any
-}
-
-async function fetchChatHistory(userId: string): Promise<chat_history> {
-  try {
-    const response = await fetch(`http://localhost:8000/chat_history/${userId}`)
-    if (!response.ok) throw new Error('Failed to fetch chat history')
-    return await response.json()
-  } catch (error) {
-    console.error('Error fetching chat history:', error)
-    return { chat_history: [] }
-  }
-}
+import { fetchChatHistory } from "@/action/chat.action"
 
 const splitMessageAndTime = (message: string | null | undefined): { content: string | null, timestamp: Date | null } => {
   if (message) {

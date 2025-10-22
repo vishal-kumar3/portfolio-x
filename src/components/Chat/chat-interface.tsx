@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { ChatMessage } from "./chat-message"
 import { QuickQuestions } from "./chat-quick-question"
 import { streamChat } from "@/utils/streamChat"
-import { setUserIdStorage } from "@/utils/localstorage"
+import { getUserIdStorage, setUserIdStorage } from "@/utils/localstorage"
 
 export interface Message {
   id: string
@@ -30,6 +30,8 @@ export function ChatInterface({
   onUserIdReceived
 }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [isThinking, setIsThinking] = useState(false)
 
   useEffect(() => {
     if (initialMessages && initialMessages.length > 0) {
@@ -42,10 +44,15 @@ export function ChatInterface({
         timestamp: new Date(),
       }]);
     }
+    // Focus input after initial messages are set
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
   }, [initialMessages])
-  const [input, setInput] = useState("")
+
   const cleanupRef = useRef<(() => void) | undefined>(undefined);
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -55,9 +62,10 @@ export function ChatInterface({
     scrollToBottom()
   }, [messages])
 
-  const handleSendMessage = (text: string) => {
+  const handleSendMessage = async (text: string) => {
     if (!text.trim()) return
     cleanupRef.current?.()
+    setIsThinking(true)
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -67,9 +75,11 @@ export function ChatInterface({
     }
 
     setMessages((prev) => [...prev, userMessage])
-
+    setInput("")
+    const userId = getUserIdStorage()
     cleanupRef.current = streamChat({
       query: userMessage.content,
+      userId,
       onConnection: () => {
         const vishiMessage: Message = {
           id: Date.now().toString(),
@@ -101,8 +111,12 @@ export function ChatInterface({
         }
       },
       onDone: () => {
-        setInput("");
+        setIsThinking(false);
         scrollToBottom();
+        // Focus input after response with a small delay to ensure UI updates are complete
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 100);
       },
       onError: (err) => {
         // Only handle actual errors, not connection close events
@@ -120,6 +134,8 @@ export function ChatInterface({
             return prev;
           });
         }
+        setIsThinking(false);
+        inputRef.current?.focus();
       }
     })
   }
@@ -185,8 +201,9 @@ export function ChatInterface({
           <div className="bg-card border-t border-elavation-one p-2">
             {messages.length === 1 && <QuickQuestions onSelect={handleQuickQuestion} />}
 
-            <div className="flex gap-3">
+            <div className="relative flex gap-3">
               <Input
+                ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => {
@@ -195,15 +212,37 @@ export function ChatInterface({
                     handleSendMessage(input)
                   }
                 }}
-                placeholder="Ask me about my work and experience..."
-                className="flex-1 border border-elavation-two text-card-foreground placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20 rounded-xl"
+                onFocus={() => {
+                  // Ensure cursor goes to the end of input when focused
+                  const input = inputRef.current;
+                  if (input) {
+                    const length = input.value.length;
+                    input.setSelectionRange(length, length);
+                  }
+                }}
+                autoFocus
+                disabled={isThinking}
+                placeholder={isThinking ? "Vishi is thinking..." : "Ask me about my work and experience..."}
+                className="flex-1 border border-elavation-two text-card-foreground placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20 rounded-xl pr-24 transition-all duration-200"
               />
-              <Button
-                onClick={() => handleSendMessage(input)}
-                className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-card-foreground rounded-xl px-4 md:px-6 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20"
-              >
-                <Send className="w-4 h-4 md:w-5 md:h-5" />
-              </Button>
+              <div className="absolute right-0 top-0 h-full flex items-center pr-1.5">
+                <Button
+                  onClick={() => handleSendMessage(input)}
+                  disabled={isThinking || !input.trim()}
+                  className={`bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-card-foreground rounded-lg px-4 transition-all duration-200 hover:shadow-lg hover:shadow-blue-500/20
+                    ${isThinking ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {isThinking ? (
+                    <div className="flex gap-1 items-center">
+                      <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    </div>
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
