@@ -28,7 +28,7 @@ export default function Footer() {
             }
           </div>
           <div className="text-md text-foreground">
-            What's sleep? Asking for a friend.
+            What&apos;s sleep? Asking for a friend.
           </div>
         </div>
       </div>

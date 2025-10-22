@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { ChevronsDownUp, ChevronsUpDown } from "lucide-react";
 import React, { useState, ReactNode } from "react";
 
@@ -71,7 +70,7 @@ export function AccordionItem({
     if (defaultOpen && !isOpen) {
       toggleItem(id);
     }
-  }, [id]);
+  }, [defaultOpen, isOpen, toggleItem, id]);
 
   return (
     <>

@@ -12,7 +12,7 @@ export function streamChat({
   userId: string;
   onConnection: () => void
   onMessage: (msg: { type: string, content: string, userId: string }) => void;
-  onError?: (err: any) => void;
+  onError?: (err: Error | unknown) => void;
   onDone?: () => void;
 }) {
   const url = new URL(`${process.env.NEXT_PUBLIC_BACKEND_URL}/query`);

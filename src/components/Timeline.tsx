@@ -1,5 +1,5 @@
 
-import { Award, Calendar, Code, Trophy, Users } from "lucide-react"
+import { Calendar, Trophy } from "lucide-react"
 import { Badge } from "@/components/Badge"
 import Image from "next/image"
 

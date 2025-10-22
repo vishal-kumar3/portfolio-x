@@ -6,15 +6,13 @@ import WorkSection from "../components/WorkSection";
 import { ExperienceSection } from "@/components/Experience/ExperienceSection";
 import { AchievementSection } from "@/components/AchievementSection";
 import Chat from "@/components/Chat/chat";
-import { warmupBackend } from "@/utils/warmup";
+import { BackendWarmup } from "@/components/BackendWarmup";
 
 export default function Home() {
-  // Fire the warmup request without waiting
-  warmupBackend();
-
   return (
     <main className="min-h-screen overflow-x-hidden mb-[60px] md:mb-0 max-w-[1100px] text-foreground p-8">
       <div>
+        <BackendWarmup />
         <Chat />
         <Header />
         <HeroSection />
