@@ -1,21 +1,11 @@
 "use client"
+
+import { useState, useEffect } from "react"
 import { ChatInterface } from "@/components/Chat/chat-interface"
 import { ChatToggleButton } from "@/components/Chat/chat-toggle"
-import { useState, useEffect } from "react"
 import type { Message } from "./chat-interface"
 import { getUserIdStorage } from "@/utils/localstorage"
 import { fetchChatHistory } from "@/action/chat.action"
-
-const splitMessageAndTime = (message: string | null | undefined): { content: string | null, timestamp: Date | null } => {
-  if (message) {
-    const match = message.match(/\[(.*?)\]:\s*([\s\S]*)/)
-    if (match) {
-      const [, timestamp, content] = match
-      return { content: content.trim(), timestamp: new Date(timestamp) }
-    }
-  }
-  return { content: null, timestamp: null }
-}
 
 export default function Chat() {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -24,40 +14,40 @@ export default function Chat() {
 
   useEffect(() => {
     if (isChatOpen) {
-      const storedUserId = getUserIdStorage();
+      const storedUserId = getUserIdStorage()
       if (storedUserId) {
-        setIsLoading(true);
-        fetchChatHistory(storedUserId)
-          .then(history => {
-            const chat_history = history.chat_history;
-            if (chat_history && chat_history.length > 0) {
-
-              const messages: Message[] = chat_history.map((msg: { user?: string; Vishi?: string }, index: number) => ({
-                id: index.toString(),
-                sender: msg.user ? "user" : "vishi",
-                timestamp: splitMessageAndTime(msg.user).timestamp || splitMessageAndTime(msg.Vishi).timestamp,
-                content: splitMessageAndTime(msg.user).content || splitMessageAndTime(msg.Vishi).content
-              }));
-              setChatHistory(messages);
-            } else {
-              setChatHistory([{
-                id: "1",
-                content: "Hello! I'm Vishal's Portfolio Assistant. How can I help you?",
-                sender: "vishi",
-                timestamp: new Date(),
-              }]);
+        setIsLoading(true)
+        const loadHistory = async () => {
+          try {
+            const history = await fetchChatHistory(storedUserId)
+            if (history.chat_history?.length > 0) {
+              const messages: Message[] = history.chat_history.map((msg: { role: "user" | "assistant", content: string, timestamp?: string }) => ({
+                id: Math.random().toString(36).substr(2, 9),
+                sender: msg.role === "user" ? "user" : "vishi",
+                timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
+                content: msg.content,
+              }))
+              setChatHistory(messages)
             }
-          })
-          .finally(() => setIsLoading(false));
+          } catch (error) {
+            console.error("Error loading chat history:", error)
+          } finally {
+            setIsLoading(false)
+          }
+        }
+        loadHistory()
       }
     }
   }, [isChatOpen])
 
   useEffect(() => {
     if (isChatOpen && window.innerWidth < 768) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden"
     } else {
-      document.body.style.overflow = 'scroll'
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
     }
   }, [isChatOpen])
 
@@ -66,17 +56,16 @@ export default function Chat() {
     setChatHistory([])
   }
 
-
-
   return (
-    <div>
-      <ChatToggleButton isOpen={isChatOpen} onClick={() => setIsChatOpen(!isChatOpen)} />
-      {isChatOpen && (
+    <div className="fixed bottom-4 right-4 z-50">
+      {isChatOpen ? (
         <ChatInterface
           onClose={handleClose}
           initialMessages={chatHistory}
           isLoading={isLoading}
         />
+      ) : (
+        <ChatToggleButton onClick={() => setIsChatOpen(true)} isOpen={false} />
       )}
     </div>
   )

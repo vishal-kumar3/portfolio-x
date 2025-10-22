@@ -1,6 +1,4 @@
-type props = {}
-
-const VishalFallback = (props: props) => {
+const VishalFallback = () => {
   return (
     <h1 className="text-7xl md:text-8xl tracking-tighter font-bold mb-4 text-primary">
       Visha

@@ -1,19 +1,14 @@
 
 import { IconType } from 'react-icons'
 import {
-  SiNextdotjs, SiGoogle, SiPostgresql, SiTypescript,
-  SiNodedotjs,
-  SiGithub,
-  SiLinux
+  SiNextdotjs, SiTypescript,
+  SiNodedotjs
 } from 'react-icons/si'
 import {
-  FaEnvelope, FaChartBar,
-  FaCube,
+  FaChartBar,
   FaNetworkWired
 } from 'react-icons/fa'
-import { BsDroplet } from 'react-icons/bs'
 import Image from 'next/image'
-import { DiPostgresql } from 'react-icons/di'
 import { BiLogoPostgresql } from 'react-icons/bi'
 
 type Skill = {

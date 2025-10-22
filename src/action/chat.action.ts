@@ -1,6 +1,8 @@
 "use server"
 
-export const fetchChatHistory = async (userId: string): Promise<any> => {
+import { ChatHistoryResponse } from "@/types/chat"
+
+export const fetchChatHistory = async (userId: string): Promise<ChatHistoryResponse> => {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat_history/${userId}`)
     if (!response.ok) throw new Error('Failed to fetch chat history')

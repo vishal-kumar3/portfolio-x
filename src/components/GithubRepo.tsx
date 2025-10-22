@@ -12,7 +12,7 @@ export interface Repo {
   language: string
   languageColor: string
   stars: string
-  forks: any
+  forks: string | number
 }
 
 async function fetchPinnedRepos(username: string): Promise<Repo[]> {
