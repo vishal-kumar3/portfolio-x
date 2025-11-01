@@ -1,5 +1,29 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      // {
+      //   source: "/github",
+      //   destination: process.env.RESUME_LINK,
+      //   permanent: false
+      // },
+      // {
+      //   source: "/resume",
+      //   destination: process.env.RESUME_LINK,
+      //   permanent: false
+      // },
+      // {
+      //   source: "/resume",
+      //   destination: process.env.RESUME_LINK,
+      //   permanent: false
+      // },
+      {
+        source: "/resume",
+        destination: process.env.RESUME_LINK,
+        permanent: false
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {
